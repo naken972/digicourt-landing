@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiCourt — Le Score Digital du Padel</title>
+  <meta name="description" content="DigiCourt révolutionne le padel avec le premier compteur de score digital dédié. Bluetooth BLE, 20h d'autonomie, règles FIP intégrées. Bientôt disponible.">
+  <meta property="og:title" content="DigiCourt — Le Score Digital du Padel">
+  <meta property="og:description" content="Le premier compteur de score digital pour le padel. Bluetooth, 20h d'autonomie, règles FIP. Bientôt dispo à 159€.">
+  <meta property="og:type" content="website">
+
+  <!--
+    ============================================================
+    CONFIGURATION FORMSPREE (capture d'emails)
+    ============================================================
+    1. Créez un compte gratuit sur https://formspree.io
+    2. Créez un nouveau formulaire
+    3. Copiez votre Form ID (ex: xpwzegop)
+    4. Remplacez YOUR_FORM_ID ci-dessous par votre ID
+    ============================================================
+  -->
+
+  <style>
+    :root {
+      --bg:       #07090d;
+      --bg2:      #0d1117;
+      --bg3:      #111820;
+      --green:    #00ff9d;
+      --green-dk: #00cc7a;
+      --red:      #ff3b3b;
+      --white:    #eef2f7;
+      --gray:     #7a8fa6;
+      --card-bg:  rgba(255,255,255,0.035);
+      --border:   rgba(0,255,157,0.14);
+      --border2:  rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── CANVAS BACKGROUND ─── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7,9,13,0.7);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(0,255,157,0.07);
+      transition: background 0.4s;
+    }
+    nav.scrolled { background: rgba(7,9,13,0.92); }
+
+    .nav-logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--green); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-cta {
+      background: var(--green);
+      color: #000;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .nav-links .nav-cta:hover {
+      background: #00ffb3;
+      color: #000;
+      box-shadow: 0 4px 20px rgba(0,255,157,0.35);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 1.5rem 5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,255,157,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50%      { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(0,255,157,0.08);
+      border: 1px solid rgba(0,255,157,0.28);
+      color: var(--green);
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.03;
+      max-width: 860px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.75;
+      margin: 1.6rem auto 0;
+      animation: fadeUp 0.7s 0.18s ease both;
+    }
+
+    /* ─── LED SCORE DISPLAY ─── */
+    .score-wrap {
+      margin: 3rem auto;
+      animation: fadeUp 0.7s 0.28s ease both;
+      position: relative;
+    }
+    .score-wrap-label {
+      position: absolute;
+      top: -11px;
+      right: 18px;
+      background: var(--green);
+      color: #000;
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      padding: 3px 9px;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    .score-display {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+      background: #030604;
+      border: 1.5px solid rgba(0,255,157,0.18);
+      border-radius: 18px;
+      padding: 1.6rem 3rem;
+      box-shadow:
+        0 0 60px rgba(0,255,157,0.07),
+        0 0 120px rgba(0,255,157,0.04),
+        inset 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .score-team { text-align: center; }
+
+    .team-name {
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .score-pts {
+      font-family: 'Courier New', 'Lucida Console', monospace;
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1;
+      transition: all 0.3s;
+    }
+    .score-sets {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+      opacity: 0.6;
+    }
+    .team-a .score-pts  { color: var(--green); text-shadow: 0 0 18px rgba(0,255,157,0.6), 0 0 40px rgba(0,255,157,0.2); }
+    .team-a .score-sets { color: var(--green); }
+    .team-b .score-pts  { color: var(--red);   text-shadow: 0 0 18px rgba(255,59,59,0.6),  0 0 40px rgba(255,59,59,0.2); }
+    .team-b .score-sets { color: var(--red); }
+
+    .score-sep {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    /* ─── EMAIL FORM ─── */
+    .email-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeUp 0.7s 0.38s ease both;
+      width: 100%;
+    }
+
+    .email-form {
+      display: flex;
+      gap: 0.7rem;
+      max-width: 500px;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .email-form input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.95rem 1.2rem;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .email-form input[type="email"]:focus {
+      border-color: rgba(0,255,157,0.5);
+      box-shadow: 0 0 0 3px rgba(0,255,157,0.08);
+    }
+    .email-form input[type="email"]::placeholder { color: #4a5d70; }
+
+    .btn-cta {
+      padding: 0.95rem 1.7rem;
+      background: var(--green);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.22s;
+    }
+    .btn-cta:hover {
+      background: #00ffb3;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,255,157,0.38);
+    }
+    .btn-cta:active { transform: translateY(0); }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: #4a5d70;
+    }
+
+    .form-success {
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,255,157,0.08);
+      border: 1px solid rgba(0,255,157,0.3);
+      color: var(--green);
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* ─── STATS BAND ─── */
+    .stats-band {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,255,157,0.03);
+      border-top: 1px solid rgba(0,255,157,0.09);
+      border-bottom: 1px solid rgba(0,255,157,0.09);
+      padding: 2.8rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 0.5rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Courier New', monospace;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-top: 0.4rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5.5rem 2rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+    }
+    h2 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+    }
+    h2 em { font-style: normal; color: var(--green); }
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      margin-top: 0.8rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.65;
+    }
+
+    /* ─── FEATURES ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.2rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feature-card:hover {
+      border-color: rgba(0,255,157,0.25);
+      background: rgba(0,255,157,0.04);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::after { opacity: 1; }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+    .feature-desc {
+      font-size: 0.875rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+    .feature-tag {
+      display: inline-block;
+      background: rgba(0,255,157,0.1);
+      color: var(--green);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-bg { background: var(--bg2); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      padding: 1rem;
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(0,255,157,0.1);
+      border: 1.5px solid rgba(0,255,157,0.3);
+      color: var(--green);
+      font-size: 1.3rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── QUESTIONNAIRES ─── */
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .qr-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 2.2rem;
+      text-align: center;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qr-card:hover {
+      border-color: rgba(0,255,157,0.25);
+      transform: translateY(-5px);
+    }
+    .qr-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #000;
+      font-weight: 900;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .qr-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .qr-desc {
+      font-size: 0.83rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .qr-frame {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.9rem;
+      margin-bottom: 1.4rem;
+      display: inline-block;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .qr-frame img {
+      display: block;
+      width: 170px;
+      height: 170px;
+    }
+    .qr-time {
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border: 1.5px solid rgba(0,255,157,0.35);
+      color: var(--green);
+      text-decoration: none;
+      border-radius: 9px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      background: rgba(0,255,157,0.08);
+      border-color: var(--green);
+      box-shadow: 0 4px 20px rgba(0,255,157,0.15);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: #040608;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 4.5rem 2rem 2.5rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.6rem;
+    }
+    .footer-logo span { color: var(--green); }
+    .footer-tag {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .footer-contact {
+      margin-bottom: 2.5rem;
+    }
+    .footer-contact a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .footer-contact a:hover { opacity: 0.75; }
+    .footer-contact p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-top: 0.3rem;
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 1.5rem;
+    }
+    .footer-bottom {
+      font-size: 0.78rem;
+      color: #3a4a5a;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .score-display { gap: 1.5rem; padding: 1.2rem 1.8rem; }
+      .stat-item { min-width: 120px; }
+      .stat-num { font-size: 1.8rem; }
+      section { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Particle canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Digi<span>Court</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Fonctionnalités</a></li>
+    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#questionnaires">Questionnaires</a></li>
+    <li><a href="#contact" class="nav-cta">Ça m'intéresse !</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Lancement en cours · Édition Fondateurs
+  </div>
+
+  <h1>Le score digital<br>pour <em>votre padel.</em></h1>
+
+  <p class="hero-sub">
+    Fini les ardoises et les désaccords. DigiCourt affiche le score en temps réel sur votre terrain — visible des deux côtés, contrôlé depuis votre poignet.
+  </p>
+
+  <!-- ─── LED Score Demo ─── -->
+  <div class="score-wrap">
+    <span class="score-wrap-label">Démo live</span>
+    <div class="score-display">
+      <div class="score-team team-a">
+        <div class="team-name">Équipe A</div>
+        <div class="score-pts" id="pts-a">40</div>
+        <div class="score-sets" id="sets-a">3 jeux</div>
+      </div>
+      <div class="score-sep"></div>
+      <div class="score-team team-b">
+        <div class="team-name">Équipe B</div>
+        <div class="score-pts" id="pts-b">Ad</div>
+        <div class="score-sets" id="sets-b">2 jeux</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Email Form ─── -->
+  <div class="email-section">
+    <form class="email-form" id="interest-form"
+          action="https://formspree.io/f/mpqnkawk"
+          method="POST">
+      <input type="email" name="email"
+             placeholder="votre@email.com"
+             required autocomplete="email">
+      <button type="submit" class="btn-cta">Ça m'intéresse ! 🎾</button>
+    </form>
+    <div class="form-success" id="form-success">
+      ✅ Merci ! Vous serez parmi les premiers informés.
+    </div>
+    <p class="form-note">Pas de spam. Uniquement les vraies infos, en avant-première.</p>
+  </div>
+</section>
+
+<!-- ─── STATS BAND ─── -->
+<div class="stats-band">
+  <div class="stat-item reveal">
+    <div class="stat-num">20h</div>
+    <div class="stat-label">Autonomie écran</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">5 mois</div>
+    <div class="stat-label">Batterie bracelet</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">~30m</div>
+    <div class="stat-label">Portée Bluetooth</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">1–9</div>
+    <div class="stat-label">Jeux par set</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-4">
+    <div class="stat-num">159€</div>
+    <div class="stat-label">Prix de lancement</div>
+  </div>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Fonctionnalités</div>
+      <h2>Pensé pour les joueurs,<br>par des joueurs.</h2>
+      <p class="section-sub">Chaque détail a été conçu sur le terrain, pour éliminer les frictions du score et vous laisser vous concentrer sur votre jeu.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-tag">Autonomie</div>
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">20h d'autonomie écran</div>
+        <div class="feature-desc">Le boîtier tient toute une journée de jeu intensif. La télécommande bracelet dure 5 mois sans recharge. Recharge universelle USB-C.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-tag">Connectivité</div>
+        <div class="feature-icon">📡</div>
+        <div class="feature-title">Bluetooth BLE ultra-fiable</div>
+        <div class="feature-desc">Puce nRF52840 pour une connexion stable jusqu'à ~30 mètres. Latence quasi nulle, aucune coupure en plein échange.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-tag">Règles de jeu</div>
+        <div class="feature-icon">🎮</div>
+        <div class="feature-title">4 modes de marque</div>
+        <div class="feature-desc">Ad infini, Punto, Oro ou 3 Ad. Sets de 1 à 9 jeux. Règlement FIP intégré pour jouer dans les règles officielles.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-tag">Affichage</div>
+        <div class="feature-icon">☀️</div>
+        <div class="feature-title">Luminosité réglable</div>
+        <div class="feature-desc">Adaptez l'intensité de l'écran selon l'environnement : intérieur tamisé ou plein soleil. Toujours parfaitement lisible.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-tag">Double face</div>
+        <div class="feature-icon">👁️</div>
+        <div class="feature-title">Visible des deux côtés</div>
+        <div class="feature-desc">L'affichage est lisible depuis les deux côtés du terrain. Idéal pour les matchs, clubs et tournois. Plus aucun litige.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-tag">Hardware</div>
+        <div class="feature-icon">🔋</div>
+        <div class="feature-title">Recharge USB-C</div>
+        <div class="feature-desc">Un câble universel suffit. Pas d'adaptateur propriétaire, pas de prise spéciale. Compatible avec tous vos chargeurs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-bg" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Utilisation</div>
+      <h2>Simple comme un point <em>gagnant.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Posez le boîtier</div>
+        <div class="step-desc">Fixez l'afficheur sur le bord de votre terrain. Allumez-le d'un simple interrupteur. Il est prêt en 3 secondes.</div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-title">Choisissez vos règles</div>
+        <div class="step-desc">Sélectionnez le mode de jeu (Ad infini, Punto, Oro…) et le nombre de jeux par set depuis la télécommande.</div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-title">Jouez, sans y penser</div>
+        <div class="step-desc">3 boutons physiques sur votre poignet. Appuyez, le score s'affiche. Concentrez-vous uniquement sur votre jeu.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUESTIONNAIRES ─── -->
+<section id="questionnaires">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Participez</div>
+      <h2>Aidez-nous à créer<br>votre DigiCourt <em>idéal.</em></h2>
+      <p class="section-sub">Scannez le QR code ou cliquez pour répondre en 3 minutes. Vos retours façonnent directement le produit final.</p>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-card reveal">
+        <div class="qr-num">1</div>
+        <div class="qr-title">Questionnaire Joueurs</div>
+        <div class="qr-desc">Vous jouez au padel ? Partagez vos habitudes, vos irritants et ce que vous attendez du score parfait.</div>
+        <div class="qr-frame">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c%2Fviewform&color=000000&bgcolor=FFFFFF&margin=1"
+            alt="QR Code Questionnaire Joueurs"
+            loading="lazy">
+        </div>
+        <div class="qr-time">⏱ Environ 3 minutes</div>
+        <a href="https://docs.google.com/forms/d/1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c/viewform"
+           target="_blank" rel="noopener" class="btn-outline">
+          Répondre →
+        </a>
+      </div>
+      <div class="qr-card reveal reveal-delay-2">
+        <div class="qr-num">2</div>
+        <div class="qr-title">Questionnaire Clubs & Gérants</div>
+        <div class="qr-desc">Vous gérez ou animez un club de padel ? Dites-nous comment DigiCourt peut transformer votre infrastructure.</div>
+        <div class="qr-frame">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4%2Fviewform&color=000000&bgcolor=FFFFFF&margin=1"
+            alt="QR Code Questionnaire Clubs"
+            loading="lazy">
+        </div>
+        <div class="qr-time">⏱ Environ 3 minutes</div>
+        <a href="https://docs.google.com/forms/d/1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4/viewform"
+           target="_blank" rel="noopener" class="btn-outline">
+          Répondre →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer id="contact">
+  <div class="footer-logo">Digi<span>Court</span></div>
+  <div class="footer-tag">Le score digital pour le padel & les sports de raquette</div>
+  <div class="footer-contact">
+    <a href="mailto:digicourtcapi@gmail.com">digicourtcapi@gmail.com</a>
+    <p>Une question ? On répond sous 24h.</p>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    © 2026 DigiCourt SAS · Tous droits réservés · Made with ❤️ par deux passionnés de padel
+  </div>
+</footer>
+
+<script>
+/* ─── PARTICLES ─── */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < 55; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.3,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+      o: Math.random() * 0.5 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,255,157,${p.o})`;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > W) p.dx *= -1;
+      if (p.y < 0 || p.y > H) p.dy *= -1;
+    });
+
+    // Draw faint lines between close particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,255,157,${0.05 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ─── NAV SCROLL ─── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ─── SCROLL REVEAL ─── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ─── ANIMATED SCORE DEMO ─── */
+(function() {
+  const SCORES = ['0', '15', '30', '40', 'Ad'];
+  const SEQUENCES = [
+    { a: 0, b: 0 }, { a: 1, b: 0 }, { a: 2, b: 0 }, { a: 3, b: 0 },
+    { a: 3, b: 1 }, { a: 3, b: 2 }, { a: 3, b: 3 }, { a: 4, b: 3 },
+    { a: 3, b: 4 }, { a: 4, b: 3 }, { a: 3, b: 3 }, { a: 4, b: 3 }
+  ];
+  let sIdx = 7;
+  let aSets = 3, bSets = 2;
+
+  const elA = document.getElementById('pts-a');
+  const elB = document.getElementById('pts-b');
+  const elAS = document.getElementById('sets-a');
+  const elBS = document.getElementById('sets-b');
+
+  function flash(el) {
+    el.style.transition = 'none';
+    el.style.opacity = '0.3';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.3s';
+      el.style.opacity = '1';
+    }, 50);
+  }
+
+  function tick() {
+    sIdx = (sIdx + 1) % SEQUENCES.length;
+    const s = SEQUENCES[sIdx];
+    flash(elA); flash(elB);
+    setTimeout(() => {
+      elA.textContent = SCORES[s.a];
+      elB.textContent = SCORES[s.b];
+      elAS.textContent = aSets + ' jeux';
+      elBS.textContent = bSets + ' jeux';
+    }, 50);
+  }
+
+  setInterval(tick, 2200);
+})();
+
+/* ─── EMAIL FORM ─── */
+(function() {
+  const form = document.getElementById('interest-form');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // Check if form ID is still placeholder
+    if (form.action.includes('YOUR_FORM_ID')) {
+      alert('⚙️ Configuration requise : remplacez YOUR_FORM_ID dans le code par votre ID Formspree.\n\nCréez un compte gratuit sur https://formspree.io');
+      return;
+    }
+
+    const btn = form.querySelector('button');
+    btn.textContent = 'Envoi…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'flex';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      btn.textContent = 'Ça m\'intéresse ! 🎾';
+      btn.disabled = false;
+      alert('Une erreur est survenue. Contactez-nous à digicourtcapi@gmail.com');
+    }
+  });
+})();
+</script>
+</body>
+</html>
