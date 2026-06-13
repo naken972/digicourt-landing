@@ -1,5 +1,6 @@
 name = "digicourt-landing"
-compatibility_date = "2025-01-01"
+compatibility_date = "2025-06-13"
 
 [assets]
 directory = "."
+not_found_handling = "404-page"
