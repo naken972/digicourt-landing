@@ -4,82 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DigiCourt — Le Score Digital du Padel</title>
-  <meta name="description" content="DigiCourt révolutionne le padel avec le premier compteur de score digital dédié. Bluetooth BLE, 20h d'autonomie, règles FIP intégrées. Bientôt disponible.">
+  <meta name="description" content="DigiCourt révolutionne le padel avec le premier compteur de score digital dédié. Bluetooth BLE, 20h d'autonomie, règles FIP intégrées. Bientôt disponible à 159€.">
   <meta property="og:title" content="DigiCourt — Le Score Digital du Padel">
   <meta property="og:description" content="Le premier compteur de score digital pour le padel. Bluetooth, 20h d'autonomie, règles FIP. Bientôt dispo à 159€.">
   <meta property="og:type" content="website">
-
-  <!--
-    ============================================================
-    CONFIGURATION FORMSPREE (capture d'emails)
-    ============================================================
-    1. Créez un compte gratuit sur https://formspree.io
-    2. Créez un nouveau formulaire
-    3. Copiez votre Form ID (ex: xpwzegop)
-    4. Remplacez YOUR_FORM_ID ci-dessous par votre ID
-    ============================================================
-  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    /* ============================================================
+       DESIGN SYSTEM — DigiCourt
+       Bleu:  #004aad  |  Lime: #d4f70c  |  Font: League Spartan
+    ============================================================ */
     :root {
-      --bg:       #07090d;
-      --bg2:      #0d1117;
-      --bg3:      #111820;
-      --green:    #00ff9d;
-      --green-dk: #00cc7a;
-      --red:      #ff3b3b;
-      --white:    #eef2f7;
-      --gray:     #7a8fa6;
-      --card-bg:  rgba(255,255,255,0.035);
-      --border:   rgba(0,255,157,0.14);
-      --border2:  rgba(255,255,255,0.07);
+      --lime:         #d4f70c;
+      --lime-hover:   #e5ff3a;
+      --lime-glow:    rgba(212,247,12,0.3);
+      --lime-subtle:  rgba(212,247,12,0.09);
+      --blue:         #004aad;
+      --blue-dark:    #003382;
+      --navy:         #00112e;
+      --navy2:        #001a45;
+      --white:        #ffffff;
+      --off-white:    #f3f6ff;
+      --text:         #0a1628;
+      --text-muted:   #5a6a82;
+      --border-light: rgba(0,74,173,0.13);
+      --border-dark:  rgba(212,247,12,0.18);
+      --card-shadow:  0 4px 30px rgba(0,74,173,0.1);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--white);
+      font-family: 'League Spartan', system-ui, sans-serif;
+      background: var(--white);
+      color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── CANVAS BACKGROUND ─── */
+    /* ─── CANVAS ─── */
     #bg-canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.35;
+      opacity: 0.55;
     }
 
-    /* ─── NAV ─── */
+    /* ════════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════════ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
-      padding: 1.1rem 2rem;
+      padding: 0.9rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(7,9,13,0.7);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(0,255,157,0.07);
-      transition: background 0.4s;
+      background: rgba(0,17,46,0.82);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border-dark);
+      transition: background 0.35s;
     }
-    nav.scrolled { background: rgba(7,9,13,0.92); }
+    nav.scrolled { background: rgba(0,17,46,0.97); }
 
     .nav-logo {
-      font-size: 1.45rem;
-      font-weight: 900;
-      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
       text-decoration: none;
-      color: var(--white);
     }
-    .nav-logo span { color: var(--green); }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo-name {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.03em;
+    }
+    .nav-logo-name span { color: var(--lime); }
 
     .nav-links {
       display: flex;
@@ -88,188 +96,192 @@
       list-style: none;
     }
     .nav-links a {
-      color: var(--gray);
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links .nav-cta {
-      background: var(--green);
-      color: #000;
-      padding: 0.5rem 1.1rem;
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta {
+      background: var(--lime) !important;
+      color: var(--navy) !important;
+      padding: 0.5rem 1.25rem !important;
       border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.875rem;
-      transition: all 0.2s;
+      font-weight: 900 !important;
+      font-size: 0.85rem !important;
+      letter-spacing: 0.01em !important;
+      transition: all 0.2s !important;
     }
-    .nav-links .nav-cta:hover {
-      background: #00ffb3;
-      color: #000;
-      box-shadow: 0 4px 20px rgba(0,255,157,0.35);
+    .nav-cta:hover {
+      background: var(--lime-hover) !important;
+      color: var(--navy) !important;
+      box-shadow: 0 4px 18px var(--lime-glow) !important;
+      transform: translateY(-1px);
     }
 
-    /* ─── HERO ─── */
+    /* ════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════ */
     .hero {
       position: relative;
       z-index: 1;
       min-height: 100vh;
+      background: var(--navy);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 8rem 1.5rem 5rem;
+      padding: 9rem 1.5rem 5.5rem;
       text-align: center;
       overflow: hidden;
     }
 
-    .hero-glow {
+    .hero-radial {
       position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(0,255,157,0.07) 0%, transparent 65%);
+      inset: 0;
+      background:
+        radial-gradient(ellipse 900px 600px at 50% 20%, rgba(0,74,173,0.28) 0%, transparent 65%),
+        radial-gradient(ellipse 600px 300px at 50% 100%, rgba(212,247,12,0.06) 0%, transparent 70%);
       pointer-events: none;
-      animation: glowPulse 4s ease-in-out infinite;
-    }
-    @keyframes glowPulse {
-      0%,100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-      50%      { opacity: 1;   transform: translateX(-50%) scale(1.08); }
     }
 
+    /* Badge */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
-      background: rgba(0,255,157,0.08);
-      border: 1px solid rgba(0,255,157,0.28);
-      color: var(--green);
-      padding: 0.45rem 1.1rem;
+      background: rgba(212,247,12,0.09);
+      border: 1px solid rgba(212,247,12,0.35);
+      color: var(--lime);
+      padding: 0.45rem 1.15rem;
       border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 2.2rem;
-      animation: fadeUp 0.7s ease both;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
     }
     .badge-dot {
       width: 7px; height: 7px;
-      background: var(--green);
+      background: var(--lime);
       border-radius: 50%;
-      animation: blink 1.4s ease-in-out infinite;
+      box-shadow: 0 0 7px var(--lime);
+      animation: blink 1.6s ease-in-out infinite;
     }
     @keyframes blink {
       0%,100% { opacity: 1; }
-      50%      { opacity: 0.3; }
+      50%      { opacity: 0.25; }
     }
 
+    /* Headline */
     h1 {
-      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      font-size: clamp(2.7rem, 7.5vw, 6rem);
       font-weight: 900;
-      letter-spacing: -0.045em;
-      line-height: 1.03;
-      max-width: 860px;
-      animation: fadeUp 0.7s 0.1s ease both;
+      letter-spacing: -0.05em;
+      line-height: 0.97;
+      color: var(--white);
+      max-width: 920px;
+      animation: fadeUp 0.6s 0.1s ease both;
     }
-    h1 em {
-      font-style: normal;
-      color: var(--green);
+    h1 .lime   { color: var(--lime); }
+    h1 .hl {
+      display: inline;
+      background: var(--lime);
+      color: var(--navy);
+      padding: 0.02em 0.18em;
+      border-radius: 5px;
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: var(--gray);
-      max-width: 560px;
-      line-height: 1.75;
-      margin: 1.6rem auto 0;
-      animation: fadeUp 0.7s 0.18s ease both;
+      font-size: clamp(0.95rem, 2.3vw, 1.15rem);
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      line-height: 1.8;
+      margin: 1.7rem auto 0;
+      font-weight: 400;
+      animation: fadeUp 0.6s 0.18s ease both;
     }
 
-    /* ─── LED SCORE DISPLAY ─── */
+    /* ─── LED Score Display ─── */
     .score-wrap {
-      margin: 3rem auto;
-      animation: fadeUp 0.7s 0.28s ease both;
+      margin: 3.2rem auto;
       position: relative;
+      display: inline-block;
+      animation: fadeUp 0.6s 0.26s ease both;
     }
-    .score-wrap-label {
+    .score-label {
       position: absolute;
-      top: -11px;
-      right: 18px;
-      background: var(--green);
-      color: #000;
-      font-size: 0.58rem;
+      top: -13px; right: 18px;
+      background: var(--lime);
+      color: var(--navy);
+      font-size: 0.56rem;
       font-weight: 900;
-      letter-spacing: 0.12em;
-      padding: 3px 9px;
+      letter-spacing: 0.13em;
+      padding: 3px 11px;
       border-radius: 5px;
       text-transform: uppercase;
     }
-
     .score-display {
       display: inline-flex;
       align-items: center;
-      gap: 2.5rem;
-      background: #030604;
-      border: 1.5px solid rgba(0,255,157,0.18);
-      border-radius: 18px;
-      padding: 1.6rem 3rem;
+      gap: 2.8rem;
+      background: #040810;
+      border: 2px solid rgba(212,247,12,0.18);
+      border-radius: 20px;
+      padding: 1.8rem 3.4rem;
       box-shadow:
-        0 0 60px rgba(0,255,157,0.07),
-        0 0 120px rgba(0,255,157,0.04),
-        inset 0 0 40px rgba(0,0,0,0.6);
+        0 0 50px rgba(212,247,12,0.05),
+        0 0 100px rgba(0,74,173,0.12),
+        inset 0 0 50px rgba(0,0,0,0.5);
     }
-
     .score-team { text-align: center; }
-
     .team-name {
-      font-size: 0.65rem;
-      color: var(--gray);
-      letter-spacing: 0.12em;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.55rem;
+      font-weight: 700;
     }
     .score-pts {
-      font-family: 'Courier New', 'Lucida Console', monospace;
-      font-size: clamp(2.8rem, 6vw, 4rem);
+      font-family: 'Courier New', monospace;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
       font-weight: 900;
       line-height: 1;
-      transition: all 0.3s;
+      transition: opacity 0.3s;
     }
     .score-sets {
-      font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       margin-top: 0.4rem;
-      opacity: 0.6;
+      opacity: 0.5;
+      letter-spacing: 0.06em;
     }
-    .team-a .score-pts  { color: var(--green); text-shadow: 0 0 18px rgba(0,255,157,0.6), 0 0 40px rgba(0,255,157,0.2); }
-    .team-a .score-sets { color: var(--green); }
-    .team-b .score-pts  { color: var(--red);   text-shadow: 0 0 18px rgba(255,59,59,0.6),  0 0 40px rgba(255,59,59,0.2); }
-    .team-b .score-sets { color: var(--red); }
-
+    .team-a .score-pts  { color: var(--lime); text-shadow: 0 0 18px rgba(212,247,12,0.65), 0 0 45px rgba(212,247,12,0.2); }
+    .team-a .score-sets { color: var(--lime); }
+    .team-b .score-pts  { color: #ff4545; text-shadow: 0 0 18px rgba(255,69,69,0.65), 0 0 45px rgba(255,69,69,0.2); }
+    .team-b .score-sets { color: #ff4545; }
     .score-sep {
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+      width: 1.5px;
+      height: 64px;
+      background: linear-gradient(to bottom, transparent, rgba(212,247,12,0.25), transparent);
     }
 
-    /* ─── EMAIL FORM ─── */
+    /* Email */
     .email-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      animation: fadeUp 0.7s 0.38s ease both;
+      gap: 0.85rem;
+      animation: fadeUp 0.6s 0.34s ease both;
       width: 100%;
     }
-
     .email-form {
       display: flex;
-      gap: 0.7rem;
-      max-width: 500px;
+      gap: 0.65rem;
+      max-width: 490px;
       width: 100%;
       flex-wrap: wrap;
       justify-content: center;
@@ -278,145 +290,217 @@
       flex: 1;
       min-width: 200px;
       padding: 0.95rem 1.2rem;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.11);
+      border-radius: 11px;
       color: var(--white);
-      font-size: 1rem;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.95rem;
       outline: none;
       transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .email-form input[type="email"]:focus {
-      border-color: rgba(0,255,157,0.5);
-      box-shadow: 0 0 0 3px rgba(0,255,157,0.08);
+    .email-form input:focus {
+      border-color: rgba(212,247,12,0.5);
+      box-shadow: 0 0 0 3px rgba(212,247,12,0.07);
     }
-    .email-form input[type="email"]::placeholder { color: #4a5d70; }
+    .email-form input::placeholder { color: rgba(255,255,255,0.22); }
 
     .btn-cta {
-      padding: 0.95rem 1.7rem;
-      background: var(--green);
-      color: #000;
+      padding: 0.95rem 1.75rem;
+      background: var(--lime);
+      color: var(--navy);
       border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 800;
+      border-radius: 11px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 900;
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.22s;
+      letter-spacing: 0.01em;
+      transition: all 0.2s;
     }
     .btn-cta:hover {
-      background: #00ffb3;
+      background: var(--lime-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,255,157,0.38);
+      box-shadow: 0 8px 28px var(--lime-glow);
     }
-    .btn-cta:active { transform: translateY(0); }
+    .btn-cta:active { transform: none; }
 
-    .form-note {
-      font-size: 0.75rem;
-      color: #4a5d70;
-    }
-
+    .form-note { font-size: 0.72rem; color: rgba(255,255,255,0.28); font-weight: 500; }
     .form-success {
       display: none;
       align-items: center;
       gap: 0.6rem;
-      background: rgba(0,255,157,0.08);
-      border: 1px solid rgba(0,255,157,0.3);
-      color: var(--green);
+      background: rgba(212,247,12,0.09);
+      border: 1px solid rgba(212,247,12,0.32);
+      color: var(--lime);
       padding: 0.85rem 1.5rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border-radius: 11px;
+      font-weight: 700;
+      font-size: 0.9rem;
     }
 
-    /* ─── STATS BAND ─── */
+    /* ════════════════════════════════════════════
+       STATS BAND
+    ════════════════════════════════════════════ */
     .stats-band {
       position: relative;
       z-index: 1;
-      background: rgba(0,255,157,0.03);
-      border-top: 1px solid rgba(0,255,157,0.09);
-      border-bottom: 1px solid rgba(0,255,157,0.09);
-      padding: 2.8rem 2rem;
+      background: var(--white);
+      border-top: 4px solid var(--lime);
+      padding: 3rem 2rem;
       display: flex;
       justify-content: center;
-      gap: 0;
       flex-wrap: wrap;
+      gap: 0;
     }
     .stat-item {
       flex: 1;
       min-width: 140px;
       text-align: center;
-      padding: 0.5rem 1.5rem;
-      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 0.5rem 2rem;
+      border-right: 1px solid rgba(0,74,173,0.1);
     }
     .stat-item:last-child { border-right: none; }
-
     .stat-num {
-      font-family: 'Courier New', monospace;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 900;
-      color: var(--green);
+      color: var(--blue);
       line-height: 1;
+      letter-spacing: -0.05em;
     }
     .stat-label {
-      font-size: 0.75rem;
-      color: var(--gray);
+      font-size: 0.68rem;
+      color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.12em;
       margin-top: 0.4rem;
+      font-weight: 700;
     }
 
-    /* ─── SECTIONS ─── */
+    /* ════════════════════════════════════════════
+       GENERIC SECTION HELPERS
+    ════════════════════════════════════════════ */
     section {
       position: relative;
       z-index: 1;
-      padding: 5.5rem 2rem;
+      padding: 6rem 2rem;
     }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-head {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
     .section-tag {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.8rem;
-    }
-    h2 {
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      display: block;
+      font-size: 0.68rem;
       font-weight: 900;
-      letter-spacing: -0.035em;
-      line-height: 1.12;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
     }
-    h2 em { font-style: normal; color: var(--green); }
+    .section-tag.on-dark { color: var(--lime); }
+
+    h2 {
+      font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.06;
+    }
+    h2 .lime { color: var(--lime); }
+    h2 .blue { color: var(--blue); }
+    h2.on-dark { color: var(--white); }
+
     .section-sub {
-      color: var(--gray);
-      font-size: 1rem;
-      margin-top: 0.8rem;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.65;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-top: 0.85rem;
+      max-width: 500px;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+    .section-sub.on-dark { color: rgba(255,255,255,0.5); }
+    .section-head { margin-bottom: 3.5rem; }
+    .section-head.center { text-align: center; }
+    .section-head.center .section-sub { margin-left: auto; margin-right: auto; }
+
+    /* ════════════════════════════════════════════
+       PROBLEM / SOLUTION
+    ════════════════════════════════════════════ */
+    .problem-section { background: var(--off-white); }
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .split-img {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 50px rgba(0,74,173,0.15);
+      aspect-ratio: 4/3;
+    }
+    .split-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .check-list { list-style: none; margin-top: 1.4rem; }
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.95rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .check-list li .icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 900;
+      margin-top: 0.1rem;
+    }
+    .check-list.bad li .icon  { background: rgba(229,57,53,0.1); color: #e53935; }
+    .check-list.good li .icon { background: rgba(0,74,173,0.1);   color: var(--blue); }
+
+    .divider-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+    .divider-label::before, .divider-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,74,173,0.12);
+    }
+    .divider-label span {
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      white-space: nowrap;
     }
 
-    /* ─── FEATURES ─── */
+    /* ════════════════════════════════════════════
+       FEATURES
+    ════════════════════════════════════════════ */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.3rem;
     }
     .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border2);
-      border-radius: 16px;
-      padding: 1.8rem;
-      transition: all 0.3s;
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -424,112 +508,279 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--lime));
       opacity: 0;
       transition: opacity 0.3s;
     }
     .feature-card:hover {
-      border-color: rgba(0,255,157,0.25);
-      background: rgba(0,255,157,0.04);
-      transform: translateY(-4px);
+      border-color: rgba(0,74,173,0.3);
+      box-shadow: 0 10px 36px rgba(0,74,173,0.1);
+      transform: translateY(-5px);
     }
     .feature-card:hover::after { opacity: 1; }
 
+    .feature-pill {
+      display: inline-block;
+      background: rgba(0,74,173,0.08);
+      color: var(--blue);
+      font-size: 0.62rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
     .feature-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, rgba(0,74,173,0.1), rgba(212,247,12,0.1));
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
     }
     .feature-title {
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 0.5rem;
-      color: var(--white);
+      letter-spacing: -0.02em;
     }
     .feature-desc {
       font-size: 0.875rem;
-      color: var(--gray);
-      line-height: 1.65;
-    }
-    .feature-tag {
-      display: inline-block;
-      background: rgba(0,255,157,0.1);
-      color: var(--green);
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 5px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.72;
+      font-weight: 400;
     }
 
-    /* ─── HOW IT WORKS ─── */
-    .how-bg { background: var(--bg2); }
+    /* ════════════════════════════════════════════
+       HOW IT WORKS
+    ════════════════════════════════════════════ */
+    .how-bg { background: var(--navy); }
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
       position: relative;
     }
-    .step {
-      text-align: center;
-      padding: 1rem;
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: calc(16.6% + 26px);
+      right: calc(16.6% + 26px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--lime), rgba(212,247,12,0.2));
+      pointer-events: none;
     }
+    .step { text-align: center; padding: 1.5rem 1rem; }
     .step-num {
-      width: 52px;
-      height: 52px;
+      width: 52px; height: 52px;
       border-radius: 50%;
-      background: rgba(0,255,157,0.1);
-      border: 1.5px solid rgba(0,255,157,0.3);
-      color: var(--green);
-      font-size: 1.3rem;
+      background: var(--lime);
+      color: var(--navy);
+      font-size: 1.2rem;
       font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1.2rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 4px 22px rgba(212,247,12,0.38);
     }
     .step-title {
       font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      font-weight: 900;
+      margin-bottom: 0.6rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
     }
     .step-desc {
       font-size: 0.875rem;
-      color: var(--gray);
-      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.75;
+      font-weight: 400;
     }
 
-    /* ─── QUESTIONNAIRES ─── */
-    .qr-grid {
+    /* ════════════════════════════════════════════
+       TERRAIN PROOF
+    ════════════════════════════════════════════ */
+    .proof-bg { background: var(--off-white); }
+    .proof-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.8rem;
-      max-width: 760px;
-      margin: 0 auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
-    .qr-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border2);
+    .proof-card {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
       border-radius: 20px;
-      padding: 2.2rem;
+      padding: 2.2rem 2rem 2rem;
+      position: relative;
+      transition: box-shadow 0.3s;
+    }
+    .proof-card:hover { box-shadow: var(--card-shadow); }
+    .proof-quote {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--lime);
+      line-height: 0.8;
+      font-family: Georgia, serif;
+      margin-bottom: 0.5rem;
+    }
+    .proof-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 1.4rem;
+    }
+    .proof-author {
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .proof-club {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+
+    .proof-stat-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .proof-stat {
+      flex: 1;
+      min-width: 160px;
       text-align: center;
-      transition: all 0.3s;
+      padding: 1.5rem 2rem;
+      border-right: 1px solid rgba(0,74,173,0.1);
+    }
+    .proof-stat:last-child { border-right: none; }
+    .proof-stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: -0.04em;
+    }
+    .proof-stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════════════════
+       PRICE CTA
+    ════════════════════════════════════════════ */
+    .price-bg { background: var(--blue); }
+    .price-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .price-left h2 { color: var(--white); }
+    .price-left p {
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      font-weight: 400;
+      max-width: 460px;
+    }
+    .price-right {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 1.2rem;
+      min-width: 240px;
+    }
+    .price-amount {
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--lime);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+    .price-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      margin-top: -0.5rem;
+      text-align: center;
+    }
+    .btn-lime {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: var(--lime);
+      color: var(--navy);
+      border: none;
+      border-radius: 12px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.22s;
+      text-align: center;
+    }
+    .btn-lime:hover {
+      background: var(--lime-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(212,247,12,0.4);
+    }
+    .no-commitment {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════════════════
+       QUESTIONNAIRES
+    ════════════════════════════════════════════ */
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 760px;
+      margin: 3.5rem auto 0;
+    }
+    .qr-card {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: 22px;
+      padding: 2.2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s;
     }
     .qr-card:hover {
-      border-color: rgba(0,255,157,0.25);
+      border-color: var(--blue);
+      box-shadow: var(--card-shadow);
       transform: translateY(-5px);
     }
     .qr-num {
-      width: 38px;
-      height: 38px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--green);
-      color: #000;
+      background: var(--blue);
+      color: var(--white);
       font-weight: 900;
       font-size: 1.1rem;
       display: flex;
@@ -537,69 +788,50 @@
       justify-content: center;
       margin-bottom: 1rem;
     }
-    .qr-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .qr-desc {
-      font-size: 0.83rem;
-      color: var(--gray);
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
+    .qr-title { font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .qr-desc  { font-size: 0.83rem; color: var(--text-muted); line-height: 1.68; margin-bottom: 1.5rem; font-weight: 400; }
     .qr-frame {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 0.9rem;
-      margin-bottom: 1.4rem;
-      display: inline-block;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      background: var(--white);
+      border: 2px solid rgba(0,74,173,0.1);
+      border-radius: 14px;
+      padding: 0.85rem;
+      margin-bottom: 1.2rem;
     }
-    .qr-frame img {
-      display: block;
-      width: 170px;
-      height: 170px;
-    }
-    .qr-time {
-      font-size: 0.72rem;
-      color: var(--gray);
-      margin-bottom: 1rem;
-    }
+    .qr-frame img { display: block; width: 160px; height: 160px; }
+    .qr-time { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1rem; font-weight: 600; }
     .btn-outline {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.7rem 1.4rem;
-      border: 1.5px solid rgba(0,255,157,0.35);
-      color: var(--green);
+      padding: 0.7rem 1.5rem;
+      border: 2px solid var(--blue);
+      color: var(--blue);
       text-decoration: none;
-      border-radius: 9px;
+      border-radius: 10px;
       font-size: 0.875rem;
-      font-weight: 700;
+      font-weight: 800;
       transition: all 0.2s;
+      letter-spacing: 0.02em;
     }
     .btn-outline:hover {
-      background: rgba(0,255,157,0.08);
-      border-color: var(--green);
-      box-shadow: 0 4px 20px rgba(0,255,157,0.15);
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(0,74,173,0.25);
     }
 
-    /* ─── GALLERY ─── */
-    .gallery-bg { background: var(--bg2); }
-
+    /* ════════════════════════════════════════════
+       GALLERY
+    ════════════════════════════════════════════ */
+    .gallery-bg { background: var(--navy); }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto;
       gap: 12px;
-      max-width: 1100px;
-      margin: 0 auto;
+      margin-top: 3.5rem;
     }
-
     .gallery-item {
       overflow: hidden;
-      border-radius: 14px;
+      border-radius: 16px;
       position: relative;
       cursor: pointer;
     }
@@ -607,64 +839,100 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(0,17,46,0.75) 0%, transparent 55%);
       opacity: 0;
       transition: opacity 0.3s;
     }
     .gallery-item:hover::after { opacity: 1; }
-    .gallery-item:hover img { transform: scale(1.04); }
-
+    .gallery-item:hover img { transform: scale(1.05); }
     .gallery-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
     }
-
     .gallery-caption {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 1rem 1.2rem 0.9rem;
       font-size: 0.8rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.9);
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
       z-index: 2;
       opacity: 0;
       transform: translateY(6px);
       transition: all 0.3s;
     }
-    .gallery-item:hover .gallery-caption {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Layout: big left, 2 right stacked, then 2 bottom */
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
     .gi-1 { grid-column: 1 / 6;  grid-row: 1; height: 340px; }
     .gi-2 { grid-column: 6 / 9;  grid-row: 1; height: 340px; }
     .gi-3 { grid-column: 9 / 13; grid-row: 1; height: 340px; }
-    .gi-4 { grid-column: 1 / 7;  grid-row: 2; height: 280px; }
-    .gi-5 { grid-column: 7 / 13; grid-row: 2; height: 280px; }
+    .gi-4 { grid-column: 1 / 7;  grid-row: 2; height: 285px; }
+    .gi-5 { grid-column: 7 / 13; grid-row: 2; height: 285px; }
 
-    @media (max-width: 768px) {
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-      }
-      .gi-1 { grid-column: 1 / 3; grid-row: 1; height: 240px; }
-      .gi-2 { grid-column: 1 / 2; grid-row: 2; height: 200px; }
-      .gi-3 { grid-column: 2 / 3; grid-row: 2; height: 200px; }
-      .gi-4 { grid-column: 1 / 2; grid-row: 3; height: 200px; }
-      .gi-5 { grid-column: 2 / 3; grid-row: 3; height: 200px; }
+    /* ════════════════════════════════════════════
+       TEAM
+    ════════════════════════════════════════════ */
+    .team-bg { background: var(--off-white); }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 720px;
+      margin: 3rem auto 0;
+    }
+    .team-card {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: 22px;
+      padding: 2.2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .team-card:hover {
+      border-color: var(--blue);
+      box-shadow: var(--card-shadow);
+      transform: translateY(-4px);
+    }
+    .team-photo {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.2rem;
+      display: block;
+      border: 3px solid var(--lime);
+      box-shadow: 0 4px 18px rgba(212,247,12,0.25);
+    }
+    .team-name-text {
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+    .team-role {
+      font-size: 0.7rem;
+      color: var(--blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.9rem;
+    }
+    .team-bio {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 400;
     }
 
-    /* ─── LIGHTBOX ─── */
+    /* ════════════════════════════════════════════
+       LIGHTBOX
+    ════════════════════════════════════════════ */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 999;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,8,22,0.95);
       align-items: center;
       justify-content: center;
       padding: 2rem;
@@ -673,73 +941,77 @@
     .lightbox img {
       max-width: 90vw;
       max-height: 88vh;
-      border-radius: 12px;
+      border-radius: 14px;
       object-fit: contain;
-      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+      box-shadow: 0 0 100px rgba(0,0,0,0.8);
     }
     .lightbox-close {
       position: absolute;
       top: 1.5rem; right: 1.5rem;
-      width: 40px; height: 40px;
+      width: 44px; height: 44px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      font-family: system-ui;
     }
-    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-close:hover {
+      background: rgba(212,247,12,0.15);
+      border-color: var(--lime);
+      color: var(--lime);
+    }
 
-    /* ─── FOOTER ─── */
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
     footer {
       position: relative;
       z-index: 1;
-      background: #040608;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 4.5rem 2rem 2.5rem;
+      background: var(--navy);
+      border-top: 4px solid var(--lime);
+      padding: 4rem 2rem 2.5rem;
       text-align: center;
     }
-    .footer-logo {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.6rem;
+    .footer-logo-img {
+      height: 64px;
+      margin: 0 auto 1rem;
+      display: block;
     }
-    .footer-logo span { color: var(--green); }
     .footer-tag {
-      color: var(--gray);
-      font-size: 0.9rem;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.85rem;
       margin-bottom: 2rem;
-    }
-    .footer-contact {
-      margin-bottom: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
     .footer-contact a {
-      color: var(--green);
+      color: var(--lime);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 800;
+      font-size: 1.05rem;
       transition: opacity 0.2s;
     }
     .footer-contact a:hover { opacity: 0.75; }
     .footer-contact p {
-      font-size: 0.82rem;
-      color: var(--gray);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
       margin-top: 0.3rem;
+      font-weight: 400;
     }
     .footer-divider {
       border: none;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      margin-bottom: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 2.5rem 0 1.5rem;
     }
-    .footer-bottom {
-      font-size: 0.78rem;
-      color: #3a4a5a;
-    }
+    .footer-bottom { font-size: 0.74rem; color: rgba(255,255,255,0.2); }
 
-    /* ─── ANIMATIONS ─── */
+    /* ════════════════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════════════════ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -747,25 +1019,44 @@
     .reveal {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transition: opacity 0.62s ease, transform 0.62s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.08s; }
-    .reveal-delay-2 { transition-delay: 0.16s; }
-    .reveal-delay-3 { transition-delay: 0.24s; }
-    .reveal-delay-4 { transition-delay: 0.32s; }
-    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .split-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .proof-cards { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .price-inner { flex-direction: column; text-align: center; }
+      .price-left p { margin-left: auto; margin-right: auto; }
+    }
     @media (max-width: 680px) {
       .nav-links { display: none; }
-      .score-display { gap: 1.5rem; padding: 1.2rem 1.8rem; }
-      .stat-item { min-width: 120px; }
-      .stat-num { font-size: 1.8rem; }
+      .score-display { gap: 1.6rem; padding: 1.3rem 2rem; }
+      .stats-band { flex-direction: column; gap: 0; }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(0,74,173,0.1);
+        padding: 1.2rem 2rem;
+      }
+      .stat-item:last-child { border-bottom: none; }
       section { padding: 4rem 1.2rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gi-1 { grid-column: 1/3; grid-row: 1; height: 240px; }
+      .gi-2 { grid-column: 1/2; grid-row: 2; height: 190px; }
+      .gi-3 { grid-column: 2/3; grid-row: 2; height: 190px; }
+      .gi-4 { grid-column: 1/2; grid-row: 3; height: 190px; }
+      .gi-5 { grid-column: 2/3; grid-row: 3; height: 190px; }
+      h1 { line-height: 1.02; }
     }
   </style>
 </head>
@@ -774,36 +1065,44 @@
 <!-- Particle canvas -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- ─── NAV ─── -->
+<!-- ════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════ -->
 <nav id="nav">
-  <a href="#" class="nav-logo">Digi<span>Court</span></a>
+  <a href="#" class="nav-logo">
+    <img src="img/logo-icon.png" alt="DigiCourt logo">
+    <span class="nav-logo-name">Digi<span>Court</span></span>
+  </a>
   <ul class="nav-links">
     <li><a href="#features">Fonctionnalités</a></li>
-    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#how">Utilisation</a></li>
+    <li><a href="#terrain">Terrain</a></li>
     <li><a href="#questionnaires">Questionnaires</a></li>
     <li><a href="#gallery">Photos</a></li>
     <li><a href="#contact" class="nav-cta">Ça m'intéresse !</a></li>
   </ul>
 </nav>
 
-<!-- ─── HERO ─── -->
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-glow"></div>
+  <div class="hero-radial"></div>
 
   <div class="badge">
     <span class="badge-dot"></span>
     Lancement en cours · Édition Fondateurs
   </div>
 
-  <h1>Le score digital<br>pour <em>votre padel.</em></h1>
+  <h1>Le score digital<br>pour <span class="hl">votre padel.</span></h1>
 
   <p class="hero-sub">
     Fini les ardoises et les désaccords. DigiCourt affiche le score en temps réel sur votre terrain — visible des deux côtés, contrôlé depuis votre poignet.
   </p>
 
-  <!-- ─── LED Score Demo ─── -->
+  <!-- Score demo animé -->
   <div class="score-wrap">
-    <span class="score-wrap-label">Démo live</span>
+    <span class="score-label">Démo live</span>
     <div class="score-display">
       <div class="score-team team-a">
         <div class="team-name">Équipe A</div>
@@ -819,7 +1118,7 @@
     </div>
   </div>
 
-  <!-- ─── Email Form ─── -->
+  <!-- Email form -->
   <div class="email-section">
     <form class="email-form" id="interest-form"
           action="https://formspree.io/f/mpqnkawk"
@@ -836,7 +1135,9 @@
   </div>
 </section>
 
-<!-- ─── STATS BAND ─── -->
+<!-- ════════════════════════════════════════════
+     STATS
+════════════════════════════════════════════ -->
 <div class="stats-band">
   <div class="stat-item reveal">
     <div class="stat-num">20h</div>
@@ -860,61 +1161,96 @@
   </div>
 </div>
 
-<!-- ─── FEATURES ─── -->
-<section id="features">
+<!-- ════════════════════════════════════════════
+     PROBLÈME / SOLUTION
+════════════════════════════════════════════ -->
+<section class="problem-section" id="solution">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag">Fonctionnalités</div>
-      <h2>Pensé pour les joueurs,<br>par des joueurs.</h2>
-      <p class="section-sub">Chaque détail a été conçu sur le terrain, pour éliminer les frictions du score et vous laisser vous concentrer sur votre jeu.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-tag">Autonomie</div>
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">20h d'autonomie écran</div>
-        <div class="feature-desc">Le boîtier tient toute une journée de jeu intensif. La télécommande bracelet dure 5 mois sans recharge. Recharge universelle USB-C.</div>
+    <div class="split-layout">
+      <div class="split-img reveal">
+        <img src="img/device-score.jpg" alt="DigiCourt boîtier LED affichant le score sur un terrain de padel">
       </div>
-      <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-tag">Connectivité</div>
-        <div class="feature-icon">📡</div>
-        <div class="feature-title">Bluetooth BLE ultra-fiable</div>
-        <div class="feature-desc">Puce nRF52840 pour une connexion stable jusqu'à ~30 mètres. Latence quasi nulle, aucune coupure en plein échange.</div>
-      </div>
-      <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-tag">Règles de jeu</div>
-        <div class="feature-icon">🎮</div>
-        <div class="feature-title">4 modes de marque</div>
-        <div class="feature-desc">Ad infini, Punto, Oro ou 3 Ad. Sets de 1 à 9 jeux. Règlement FIP intégré pour jouer dans les règles officielles.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-tag">Affichage</div>
-        <div class="feature-icon">☀️</div>
-        <div class="feature-title">Luminosité réglable</div>
-        <div class="feature-desc">Adaptez l'intensité de l'écran selon l'environnement : intérieur tamisé ou plein soleil. Toujours parfaitement lisible.</div>
-      </div>
-      <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-tag">Double face</div>
-        <div class="feature-icon">👁️</div>
-        <div class="feature-title">Visible des deux côtés</div>
-        <div class="feature-desc">L'affichage est lisible depuis les deux côtés du terrain. Idéal pour les matchs, clubs et tournois. Plus aucun litige.</div>
-      </div>
-      <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-tag">Hardware</div>
-        <div class="feature-icon">🔋</div>
-        <div class="feature-title">Recharge USB-C</div>
-        <div class="feature-desc">Un câble universel suffit. Pas d'adaptateur propriétaire, pas de prise spéciale. Compatible avec tous vos chargeurs.</div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-tag">Le problème</span>
+        <h2>Le score, c'est<br><span class="blue">le seul litige</span> à chaque partie.</h2>
+        <ul class="check-list bad">
+          <li><span class="icon">✕</span>Ardoise illisible depuis le fond du terrain</li>
+          <li><span class="icon">✕</span>Désaccords fréquents sur le score en cours</li>
+          <li><span class="icon">✕</span>Applications smartphone mal adaptées au jeu</li>
+          <li><span class="icon">✕</span>Concentration brisée à chaque point contesté</li>
+        </ul>
+        <div class="divider-label"><span>La solution DigiCourt</span></div>
+        <ul class="check-list good">
+          <li><span class="icon">✓</span>Affichage LED visible des deux côtés du terrain</li>
+          <li><span class="icon">✓</span>Télécommande bracelet Bluetooth sur le poignet</li>
+          <li><span class="icon">✓</span>Règles FIP intégrées : Ad infini, Punto, Oro…</li>
+          <li><span class="icon">✓</span>Conçu et testé par de vrais joueurs de padel</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── HOW IT WORKS ─── -->
+<!-- ════════════════════════════════════════════
+     FEATURES
+════════════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-tag">Fonctionnalités</span>
+      <h2>Pensé pour les joueurs,<br>par des joueurs.</h2>
+      <p class="section-sub">Chaque détail a été conçu sur le terrain pour éliminer les frictions du score et vous laisser vous concentrer sur votre jeu.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-pill">Autonomie</div>
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">20h d'autonomie écran</div>
+        <div class="feature-desc">Le boîtier tient toute une journée de jeu intensif. La télécommande bracelet dure 5 mois sans recharge. Recharge universelle USB-C.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-pill">Connectivité</div>
+        <div class="feature-icon">📡</div>
+        <div class="feature-title">Bluetooth BLE ultra-fiable</div>
+        <div class="feature-desc">Puce nRF52840 pour une connexion stable jusqu'à ~30 mètres. Latence quasi nulle, aucune coupure en plein échange.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-pill">Règles de jeu</div>
+        <div class="feature-icon">🎮</div>
+        <div class="feature-title">4 modes de marque</div>
+        <div class="feature-desc">Ad infini, Punto, Oro ou 3 Ad. Sets de 1 à 9 jeux. Règlement FIP intégré pour jouer dans les règles officielles.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-pill">Affichage</div>
+        <div class="feature-icon">☀️</div>
+        <div class="feature-title">Luminosité réglable</div>
+        <div class="feature-desc">Adaptez l'intensité de l'écran selon l'environnement : intérieur tamisé ou plein soleil. Toujours parfaitement lisible.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-pill">Double face</div>
+        <div class="feature-icon">👁️</div>
+        <div class="feature-title">Visible des deux côtés</div>
+        <div class="feature-desc">L'affichage est lisible depuis les deux côtés du terrain. Idéal pour les matchs, clubs et tournois. Plus aucun litige de score.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-pill">Hardware</div>
+        <div class="feature-icon">🔋</div>
+        <div class="feature-title">Recharge USB-C</div>
+        <div class="feature-desc">Un câble universel suffit. Pas d'adaptateur propriétaire, pas de prise spéciale. Compatible avec tous vos chargeurs existants.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════════ -->
 <section class="how-bg" id="how">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag">Utilisation</div>
-      <h2>Simple comme un point <em>gagnant.</em></h2>
+    <div class="section-head center reveal">
+      <span class="section-tag on-dark">Utilisation</span>
+      <h2 class="on-dark">Simple comme un point <span class="lime">gagnant.</span></h2>
+      <p class="section-sub on-dark">En 3 secondes, vous êtes prêts à jouer. Aucune application, aucune configuration complexe.</p>
     </div>
     <div class="steps">
       <div class="step reveal">
@@ -930,18 +1266,86 @@
       <div class="step reveal reveal-delay-2">
         <div class="step-num">3</div>
         <div class="step-title">Jouez, sans y penser</div>
-        <div class="step-desc">3 boutons physiques sur votre poignet. Appuyez, le score s'affiche. Concentrez-vous uniquement sur votre jeu.</div>
+        <div class="step-desc">3 boutons physiques sur le poignet. Appuyez après chaque point — le score s'affiche instantanément.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── QUESTIONNAIRES ─── -->
+<!-- ════════════════════════════════════════════
+     TERRAIN PROOF
+════════════════════════════════════════════ -->
+<section class="proof-bg" id="terrain">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-tag">Testé sur le terrain</span>
+      <h2>Validé par de vrais joueurs,<br>dans de vrais clubs.</h2>
+      <p class="section-sub">DigiCourt a été testé pendant 1 mois au Castel Padel de Bourges avec de vrais joueurs. Les retours parlent d'eux-mêmes.</p>
+    </div>
+    <div class="proof-cards">
+      <div class="proof-card reveal">
+        <div class="proof-quote">"</div>
+        <p class="proof-text">Le système fonctionne bien, il est pratique à utiliser, et il répond à une vraie problématique que les joueurs vivent à chaque partie. Plusieurs joueurs ont dit ne plus vouloir jouer sans.</p>
+        <div class="proof-author">Castel Padel — Bourges</div>
+        <div class="proof-club">Club partenaire · Test terrain 1 mois</div>
+      </div>
+      <div class="proof-card reveal reveal-delay-1">
+        <div class="proof-quote">"</div>
+        <p class="proof-text">Le concept est pertinent et nous avons manifesté notre intérêt pour un partenariat à terme. Un outil qui correspond vraiment aux besoins des clubs et des joueurs sérieux.</p>
+        <div class="proof-author">Club de Padel — Blois</div>
+        <div class="proof-club">Club partenaire · Intérêt partenariat confirmé</div>
+      </div>
+    </div>
+    <div class="proof-stat-bar reveal">
+      <div class="proof-stat">
+        <div class="proof-stat-num">1M+</div>
+        <div class="proof-stat-label">Joueurs padel en France</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">+40%</div>
+        <div class="proof-stat-label">Croissance / an</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">4100+</div>
+        <div class="proof-stat-label">Terrains en France</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">350M€</div>
+        <div class="proof-stat-label">Marché padel FR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     PRICE CTA
+════════════════════════════════════════════ -->
+<section class="price-bg" id="commander">
+  <div class="container">
+    <div class="price-inner">
+      <div class="price-left reveal">
+        <span class="section-tag on-dark">Édition Fondateurs</span>
+        <h2 class="on-dark">Soyez parmi les premiers.</h2>
+        <p>Rejoignez la liste d'attente dès maintenant et soyez averti en priorité lors de l'ouverture des précommandes. Prix de lancement garanti à 159€ — soit 80% moins cher que la concurrence pro.</p>
+      </div>
+      <div class="price-right reveal reveal-delay-1">
+        <div class="price-amount">159€</div>
+        <div class="price-note">Prix de lancement · Livraison France</div>
+        <a href="#contact" class="btn-lime">Je veux le mien 🎾</a>
+        <div class="no-commitment">Sans engagement · Pas de CB requise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     QUESTIONNAIRES
+════════════════════════════════════════════ -->
 <section id="questionnaires">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag">Participez</div>
-      <h2>Aidez-nous à créer<br>votre DigiCourt <em>idéal.</em></h2>
+    <div class="section-head center reveal">
+      <span class="section-tag">Participez</span>
+      <h2>Aidez-nous à créer<br>votre DigiCourt idéal.</h2>
       <p class="section-sub">Scannez le QR code ou cliquez pour répondre en 3 minutes. Vos retours façonnent directement le produit final.</p>
     </div>
     <div class="qr-grid">
@@ -950,46 +1354,39 @@
         <div class="qr-title">Questionnaire Joueurs</div>
         <div class="qr-desc">Vous jouez au padel ? Partagez vos habitudes, vos irritants et ce que vous attendez du score parfait.</div>
         <div class="qr-frame">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c%2Fviewform&color=000000&bgcolor=FFFFFF&margin=1"
-            alt="QR Code Questionnaire Joueurs"
-            loading="lazy">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c%2Fviewform&color=00112e&bgcolor=FFFFFF&margin=1"
+               alt="QR Code Questionnaire Joueurs" loading="lazy">
         </div>
         <div class="qr-time">⏱ Environ 3 minutes</div>
         <a href="https://docs.google.com/forms/d/1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c/viewform"
-           target="_blank" rel="noopener" class="btn-outline">
-          Répondre →
-        </a>
+           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
       </div>
       <div class="qr-card reveal reveal-delay-2">
         <div class="qr-num">2</div>
         <div class="qr-title">Questionnaire Clubs & Gérants</div>
         <div class="qr-desc">Vous gérez ou animez un club de padel ? Dites-nous comment DigiCourt peut transformer votre infrastructure.</div>
         <div class="qr-frame">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4%2Fviewform&color=000000&bgcolor=FFFFFF&margin=1"
-            alt="QR Code Questionnaire Clubs"
-            loading="lazy">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4%2Fviewform&color=00112e&bgcolor=FFFFFF&margin=1"
+               alt="QR Code Questionnaire Clubs" loading="lazy">
         </div>
         <div class="qr-time">⏱ Environ 3 minutes</div>
         <a href="https://docs.google.com/forms/d/1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4/viewform"
-           target="_blank" rel="noopener" class="btn-outline">
-          Répondre →
-        </a>
+           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── GALLERY ─── -->
+<!-- ════════════════════════════════════════════
+     GALLERY
+════════════════════════════════════════════ -->
 <section class="gallery-bg" id="gallery">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="section-tag">En coulisses</div>
-      <h2>Fabriqué à la main,<br>avec <em>passion.</em></h2>
-      <p class="section-sub">DigiCourt est né dans un atelier, soudé composant par composant, testé point par point. Voici ce que ça donne.</p>
+    <div class="section-head center reveal">
+      <span class="section-tag on-dark">En coulisses</span>
+      <h2 class="on-dark">Fabriqué à la main,<br>avec <span class="lime">passion.</span></h2>
+      <p class="section-sub on-dark">DigiCourt est né dans un atelier, soudé composant par composant, testé point par point. Voici ce que ça donne.</p>
     </div>
-
     <div class="gallery-grid">
       <div class="gallery-item gi-1 reveal" onclick="openLightbox('img/device-score.jpg')">
         <img src="img/device-score.jpg" alt="DigiCourt affichant le score 40 - Ad" loading="lazy">
@@ -1021,11 +1418,40 @@
   <img id="lightbox-img" src="" alt="Photo DigiCourt agrandie">
 </div>
 
-<!-- ─── FOOTER ─── -->
+<!-- ════════════════════════════════════════════
+     TEAM
+════════════════════════════════════════════ -->
+<section class="team-bg" id="equipe">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-tag">L'équipe fondatrice</span>
+      <h2>Nés du terrain.<br><span class="blue">Passionnés de tech.</span></h2>
+      <p class="section-sub">Deux étudiants ingénieurs à l'INSA Centre Val de Loire — amis, joueurs de padel, et fondateurs d'une startup qui réinvente le score.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <img src="img/founders.jpg" alt="Jules Cabeleira" class="team-photo" style="object-position: 20% center;">
+        <div class="team-name-text">Jules Cabeleira</div>
+        <div class="team-role">Co-fondateur · CTO</div>
+        <div class="team-bio">Conception hardware, firmware nRF52840, prototypage et certification CE. Passionné d'électronique embarquée — il a conçu DigiCourt de zéro et joue au padel sur les terrains qu'il équipe.</div>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <img src="img/founders.jpg" alt="Many Carré Pistollet" class="team-photo" style="object-position: 80% center;">
+        <div class="team-name-text">Many Carré Pistollet</div>
+        <div class="team-role">Co-fondateur · CEO</div>
+        <div class="team-bio">Stratégie commerciale, marketing et partenariats clubs. Étudiant ingénieur en alternance — il porte la vision business avec une connaissance terrain unique et un vrai amour du padel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
 <footer id="contact">
-  <div class="footer-logo">Digi<span>Court</span></div>
+  <img src="img/logo-full.png" alt="DigiCourt" class="footer-logo-img">
   <div class="footer-tag">Le score digital pour le padel & les sports de raquette</div>
-  <div class="footer-contact">
+  <div class="footer-contact" style="margin-bottom: 2rem;">
     <a href="mailto:digicourtcapi@gmail.com">digicourtcapi@gmail.com</a>
     <p>Une question ? On répond sous 24h.</p>
   </div>
@@ -1035,9 +1461,12 @@
   </div>
 </footer>
 
+<!-- ════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════ -->
 <script>
-/* ─── PARTICLES ─── */
-(function() {
+/* ─── PARTICLES (lime) ─── */
+(function () {
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
@@ -1049,14 +1478,14 @@
   window.addEventListener('resize', resize);
   resize();
 
-  for (let i = 0; i < 55; i++) {
+  for (let i = 0; i < 48; i++) {
     particles.push({
       x: Math.random() * W,
       y: Math.random() * H,
-      r: Math.random() * 1.2 + 0.3,
-      dx: (Math.random() - 0.5) * 0.25,
-      dy: (Math.random() - 0.5) * 0.25,
-      o: Math.random() * 0.5 + 0.1
+      r: Math.random() * 1.3 + 0.3,
+      dx: (Math.random() - 0.5) * 0.22,
+      dy: (Math.random() - 0.5) * 0.22,
+      o: Math.random() * 0.35 + 0.06
     });
   }
 
@@ -1065,25 +1494,22 @@
     particles.forEach(p => {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,255,157,${p.o})`;
+      ctx.fillStyle = `rgba(212,247,12,${p.o})`;
       ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
+      p.x += p.dx; p.y += p.dy;
       if (p.x < 0 || p.x > W) p.dx *= -1;
       if (p.y < 0 || p.y > H) p.dy *= -1;
     });
-
-    // Draw faint lines between close particles
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 110) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,255,157,${0.05 * (1 - dist/120)})`;
+          ctx.strokeStyle = `rgba(212,247,12,${0.035 * (1 - d / 110)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -1100,22 +1526,20 @@ window.addEventListener('scroll', () => {
 });
 
 /* ─── SCROLL REVEAL ─── */
-const revealObserver = new IntersectionObserver(entries => {
+const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-/* ─── ANIMATED SCORE DEMO ─── */
-(function() {
+/* ─── ANIMATED SCORE ─── */
+(function () {
   const SCORES = ['0', '15', '30', '40', 'Ad'];
-  const SEQUENCES = [
+  const SEQ = [
     { a: 0, b: 0 }, { a: 1, b: 0 }, { a: 2, b: 0 }, { a: 3, b: 0 },
     { a: 3, b: 1 }, { a: 3, b: 2 }, { a: 3, b: 3 }, { a: 4, b: 3 },
     { a: 3, b: 4 }, { a: 4, b: 3 }, { a: 3, b: 3 }, { a: 4, b: 3 }
   ];
-  let sIdx = 7;
-  let aSets = 3, bSets = 2;
-
+  let idx = 7, aS = 3, bS = 2;
   const elA = document.getElementById('pts-a');
   const elB = document.getElementById('pts-b');
   const elAS = document.getElementById('sets-a');
@@ -1123,26 +1547,19 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   function flash(el) {
     el.style.transition = 'none';
-    el.style.opacity = '0.3';
-    setTimeout(() => {
-      el.style.transition = 'opacity 0.3s';
-      el.style.opacity = '1';
-    }, 50);
+    el.style.opacity = '0.25';
+    setTimeout(() => { el.style.transition = 'opacity 0.3s'; el.style.opacity = '1'; }, 60);
   }
-
-  function tick() {
-    sIdx = (sIdx + 1) % SEQUENCES.length;
-    const s = SEQUENCES[sIdx];
+  setInterval(() => {
+    idx = (idx + 1) % SEQ.length;
     flash(elA); flash(elB);
     setTimeout(() => {
-      elA.textContent = SCORES[s.a];
-      elB.textContent = SCORES[s.b];
-      elAS.textContent = aSets + ' jeux';
-      elBS.textContent = bSets + ' jeux';
-    }, 50);
-  }
-
-  setInterval(tick, 2200);
+      elA.textContent = SCORES[SEQ[idx].a];
+      elB.textContent = SCORES[SEQ[idx].b];
+      elAS.textContent = aS + ' jeux';
+      elBS.textContent = bS + ' jeux';
+    }, 60);
+  }, 2200);
 })();
 
 /* ─── LIGHTBOX ─── */
@@ -1158,37 +1575,26 @@ function closeLightbox() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 /* ─── EMAIL FORM ─── */
-(function() {
+(function () {
   const form = document.getElementById('interest-form');
   const success = document.getElementById('form-success');
-
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
-    // Check if form ID is still placeholder
-    if (form.action.includes('YOUR_FORM_ID')) {
-      alert('⚙️ Configuration requise : remplacez YOUR_FORM_ID dans le code par votre ID Formspree.\n\nCréez un compte gratuit sur https://formspree.io');
-      return;
-    }
-
     const btn = form.querySelector('button');
     btn.textContent = 'Envoi…';
     btn.disabled = true;
-
     try {
       const res = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        headers: { Accept: 'application/json' }
       });
       if (res.ok) {
         form.style.display = 'none';
         success.style.display = 'flex';
-      } else {
-        throw new Error();
-      }
+      } else throw new Error();
     } catch {
-      btn.textContent = 'Ça m\'intéresse ! 🎾';
+      btn.textContent = "Ça m'intéresse ! 🎾";
       btn.disabled = false;
       alert('Une erreur est survenue. Contactez-nous à digicourtcapi@gmail.com');
     }
