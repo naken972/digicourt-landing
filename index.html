@@ -646,6 +646,9 @@
     .gi-4 { grid-column: 1 / 7;  grid-row: 2; height: 280px; }
     .gi-5 { grid-column: 7 / 13; grid-row: 2; height: 280px; }
 
+    /* Recadrage portrait fondateurs : on remonte le cadrage pour voir les visages */
+    .gi-3 img { object-position: center 15%; }
+
     @media (max-width: 768px) {
       .gallery-grid {
         grid-template-columns: 1fr 1fr;
@@ -782,7 +785,7 @@
     <li><a href="#how">Comment ça marche</a></li>
     <li><a href="#questionnaires">Questionnaires</a></li>
     <li><a href="#gallery">Photos</a></li>
-    <li><a href="#contact" class="nav-cta">Ça m'intéresse !</a></li>
+    <li><a href="#email-form" class="nav-cta">Ça m'intéresse !</a></li>
   </ul>
 </nav>
 
@@ -820,7 +823,7 @@
   </div>
 
   <!-- ─── Email Form ─── -->
-  <div class="email-section">
+  <div class="email-section" id="email-form">
     <form class="email-form" id="interest-form"
           action="https://formspree.io/f/mpqnkawk"
           method="POST">
