@@ -302,6 +302,7 @@
       gap: 0.85rem;
       animation: fadeUp 0.6s 0.34s ease both;
       width: 100%;
+      scroll-margin-top: 100px;
     }
     .email-form {
       display: flex;
@@ -1734,6 +1735,19 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ─── CTA -> focus champ email ─── */
+function focusEmailField() {
+  const input = document.querySelector('#email-form input[type="email"]');
+  if (!input) return;
+  setTimeout(() => {
+    input.focus({ preventScroll: true });
+  }, 450);
+}
+document.querySelectorAll('a[href="#email-form"]').forEach(link => {
+  link.addEventListener('click', focusEmailField);
+});
+if (window.location.hash === '#email-form') focusEmailField();
 
 /* ─── EMAIL FORM ─── */
 (function () {
