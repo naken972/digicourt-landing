@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://digicourt.fr/">
   <meta property="og:title" content="DigiCourt — Le compteur de score digital pour le padel">
   <meta property="og:description" content="Fini les ardoises et les désaccords. DigiCourt affiche le score en temps réel sur votre terrain de padel — visible des deux côtés, contrôlé depuis votre poignet.">
-  <meta property="og:image" content="https://digicourt.fr/img/p2.jpg">
+  <meta property="og:image" content="https://digicourt.fr/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="DigiCourt — afficheur LED score padel">
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DigiCourt — Le compteur de score digital pour le padel">
   <meta name="twitter:description" content="Fini les ardoises. DigiCourt affiche le score en temps réel sur votre terrain de padel.">
-  <meta name="twitter:image" content="https://digicourt.fr/img/p2.jpg">
+  <meta name="twitter:image" content="https://digicourt.fr/img/og-image.jpg">
 
   <!-- ═══════════════════════════════════════════
        DONNÉES STRUCTURÉES (Schema.org)
@@ -1209,6 +1209,27 @@
       margin: 2.5rem 0 1.5rem;
     }
     .footer-bottom { font-size: 0.74rem; color: rgba(255,255,255,0.2); }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .footer-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .footer-social a:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+      background: rgba(212,247,12,0.07);
+    }
 
     /* ════════════════════════════════════════════
        BANDEAU COOKIES RGPD
@@ -1290,8 +1311,66 @@
       .price-inner { flex-direction: column; text-align: center; }
       .price-left p { margin-left: auto; margin-right: auto; }
     }
+    /* ─── HAMBURGER ─── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(0,17,46,0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 1.2rem 1.5rem 1.5rem;
+      z-index: 199;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: block;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--lime); }
+    .mobile-menu .mob-cta {
+      margin-top: 0.8rem;
+      background: var(--lime);
+      color: var(--navy) !important;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 900 !important;
+      border-bottom: none !important;
+    }
+
     @media (max-width: 680px) {
       .nav-links { display: none; }
+      .hamburger { display: flex; }
       .score-display { width: min(300px, 90vw); }
       .score-point { padding: 0.6rem 1rem; }
       .score-left { padding: 0.7rem 0.8rem; min-width: 58px; }
@@ -1333,7 +1412,7 @@
      NAV
 ════════════════════════════════════════════ -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
+  <a href="/" class="nav-logo">
     <img src="img/logo-icon.png" alt="DigiCourt logo">
     <span class="nav-logo-name">Digi<span>Court</span></span>
   </a>
@@ -1341,11 +1420,22 @@
     <li><a href="#features">Fonctionnalités</a></li>
     <li><a href="#how">Utilisation</a></li>
     <li><a href="#terrain">Terrain</a></li>
-    <li><a href="#questionnaires">Questionnaires</a></li>
     <li><a href="#gallery">Photos</a></li>
     <li><a href="#email-form" class="nav-cta">Ça m'intéresse !</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Menu mobile -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#features" class="mob-link">Fonctionnalités</a>
+  <a href="#how" class="mob-link">Utilisation</a>
+  <a href="#terrain" class="mob-link">Terrain</a>
+  <a href="#gallery" class="mob-link">Photos</a>
+  <a href="#email-form" class="mob-cta">Ça m'intéresse ! 🎾</a>
+</div>
 
 <!-- ════════════════════════════════════════════
      HERO
@@ -1404,7 +1494,10 @@
     <div class="form-success" id="form-success">
       ✅ Merci ! Vous serez parmi les premiers informés.
     </div>
-    <p class="form-note">Pas de spam. Uniquement les vraies infos, en avant-première.</p>
+    <p class="form-note">🔒 Pas de spam. Uniquement les vraies infos, en avant-première.</p>
+    <p class="form-note" style="margin-top:-0.3rem; color:rgba(255,255,255,0.38);">
+      <span id="signup-count">47</span> personnes déjà inscrites sur la liste d'attente
+    </p>
   </div>
 </section>
 
@@ -1592,7 +1685,7 @@
     <div class="section-head center reveal">
       <span class="section-tag">Testé sur le terrain</span>
       <h2>Validé par de vrais joueurs,<br>dans de vrais clubs.</h2>
-      <p class="section-sub">DigiCourt a été testé pendant 1 mois au  l Padel de Bourges avec de vrais joueurs. Les retours parlent d'eux-mêmes.</p>
+      <p class="section-sub">DigiCourt a été testé pendant 1 mois au Castel Padel de Bourges avec de vrais joueurs. Les retours parlent d'eux-mêmes.</p>
     </div>
     <div class="proof-cards">
       <div class="proof-card reveal">
@@ -1666,8 +1759,7 @@
         <div class="qr-title">Questionnaire Joueurs</div>
         <div class="qr-desc">Vous jouez au padel ? Partagez vos habitudes, vos irritants et ce que vous attendez du score parfait.</div>
         <div class="qr-frame">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c%2Fviewform&color=00112e&bgcolor=FFFFFF&margin=1"
-               alt="QR Code Questionnaire Joueurs" loading="lazy">
+          <img src="img/qr-joueurs.png" alt="QR Code Questionnaire Joueurs" loading="lazy">
         </div>
         <div class="qr-time">⏱ Environ 3 minutes</div>
         <a href="https://docs.google.com/forms/d/1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c/viewform"
@@ -1678,8 +1770,7 @@
         <div class="qr-title">Questionnaire Clubs & Gérants</div>
         <div class="qr-desc">Vous gérez ou animez un club de padel ? Dites-nous comment DigiCourt peut transformer votre infrastructure.</div>
         <div class="qr-frame">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4%2Fviewform&color=00112e&bgcolor=FFFFFF&margin=1"
-               alt="QR Code Questionnaire Clubs" loading="lazy">
+          <img src="img/qr-clubs.png" alt="QR Code Questionnaire Clubs" loading="lazy">
         </div>
         <div class="qr-time">⏱ Environ 3 minutes</div>
         <a href="https://docs.google.com/forms/d/1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4/viewform"
@@ -1785,6 +1876,10 @@
     <a href="mailto:digicourtcapi@gmail.com">digicourtcapi@gmail.com</a>
     <p>Une question ? On répond sous 24h.</p>
   </div>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/digi.court/" target="_blank" rel="noopener" aria-label="Instagram DigiCourt" title="Instagram">📸</a>
+    <a href="https://www.tiktok.com/@digi.court" target="_blank" rel="noopener" aria-label="TikTok DigiCourt" title="TikTok">🎵</a>
+  </div>
   <hr class="footer-divider">
   <div class="footer-bottom">
     © 2026 DigiCourt · Tous droits réservés · Made with ❤️ par deux passionnés de padel
@@ -1855,6 +1950,24 @@
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
+
+/* ─── HAMBURGER MENU ─── */
+(function() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', false);
+    });
+  });
+})();
 
 /* ─── SCROLL REVEAL ─── */
 const ro = new IntersectionObserver(entries => {
