@@ -77,14 +77,24 @@
   <meta name="theme-color" content="#00112e">
 
   <!-- ═══════════════════════════════════════════
-       GOOGLE ANALYTICS (GA4)
+       GOOGLE ANALYTICS (GA4) — chargé après consentement
   ═══════════════════════════════════════════ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MMKNM3XNWF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-MMKNM3XNWF');
+    gtag('consent', 'default', {
+      analytics_storage: 'denied'
+    });
+    function loadGA() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-MMKNM3XNWF';
+      document.head.appendChild(s);
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      gtag('config', 'G-MMKNM3XNWF');
+    }
+    if (localStorage.getItem('dc_cookies') === 'accepted') loadGA();
   </script>
 
   <!-- ═══════════════════════════════════════════
@@ -1201,6 +1211,56 @@
     .footer-bottom { font-size: 0.74rem; color: rgba(255,255,255,0.2); }
 
     /* ════════════════════════════════════════════
+       BANDEAU COOKIES RGPD
+    ════════════════════════════════════════════ */
+    #cookie-banner {
+      position: fixed;
+      bottom: 1.2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      width: min(640px, calc(100vw - 2rem));
+      background: #0d1829;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      animation: fadeUp 0.4s ease both;
+    }
+    #cookie-banner p {
+      flex: 1;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+      margin: 0;
+    }
+    #cookie-banner a { color: var(--lime); }
+    .cookie-btns { display: flex; gap: 0.5rem; flex-shrink: 0; }
+    .btn-cookie-accept {
+      background: var(--lime); color: var(--navy);
+      border: none; border-radius: 8px;
+      padding: 0.5rem 1.1rem;
+      font-family: inherit; font-size: 0.82rem; font-weight: 800;
+      cursor: pointer; white-space: nowrap;
+    }
+    .btn-cookie-accept:hover { background: #e5ff3a; }
+    .btn-cookie-refuse {
+      background: transparent; color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-family: inherit; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+    }
+    .btn-cookie-refuse:hover { color: rgba(255,255,255,0.8); }
+    @media (max-width: 520px) {
+      #cookie-banner { flex-direction: column; align-items: flex-start; }
+      .cookie-btns { width: 100%; }
+      .btn-cookie-accept, .btn-cookie-refuse { flex: 1; text-align: center; }
+    }
+
+    /* ════════════════════════════════════════════
        ANIMATIONS
     ════════════════════════════════════════════ */
     @keyframes fadeUp {
@@ -1727,7 +1787,8 @@
   </div>
   <hr class="footer-divider">
   <div class="footer-bottom">
-    © 2026 DigiCourt SAS · Tous droits réservés · Made with ❤️ par deux passionnés de padel
+    © 2026 DigiCourt · Tous droits réservés · Made with ❤️ par deux passionnés de padel
+    · <a href="/mentions-legales.html" style="color:rgba(255,255,255,0.35); text-decoration:underline;">Mentions légales</a>
   </div>
 </footer>
 
@@ -1881,6 +1942,35 @@ if (window.location.hash === '#email-form') focusEmailField();
       btn.disabled = false;
       alert('Une erreur est survenue. Contactez-nous à digicourtcapi@gmail.com');
     }
+  });
+})();
+</script>
+
+<!-- ─── BANDEAU COOKIES RGPD ─── -->
+<div id="cookie-banner" style="display:none">
+  <p>
+    🍪 On utilise des cookies analytiques (Google Analytics) pour comprendre comment vous utilisez le site.
+    <a href="/mentions-legales.html">En savoir plus</a>
+  </p>
+  <div class="cookie-btns">
+    <button class="btn-cookie-refuse" id="cookie-refuse">Refuser</button>
+    <button class="btn-cookie-accept" id="cookie-accept">Accepter</button>
+  </div>
+</div>
+<script>
+(function() {
+  var pref = localStorage.getItem('dc_cookies');
+  if (!pref) {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function() {
+    localStorage.setItem('dc_cookies', 'accepted');
+    document.getElementById('cookie-banner').style.display = 'none';
+    loadGA();
+  });
+  document.getElementById('cookie-refuse').addEventListener('click', function() {
+    localStorage.setItem('dc_cookies', 'refused');
+    document.getElementById('cookie-banner').style.display = 'none';
   });
 })();
 </script>

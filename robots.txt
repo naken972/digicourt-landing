@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /googlea705f109e01e20b8.html
+
+Sitemap: https://digicourt.fr/sitemap.xml
