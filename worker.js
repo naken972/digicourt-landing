@@ -6,7 +6,7 @@
  */
 
 const FORMSPREE_URL = 'https://formspree.io/f/mpqnkawk';
-const INITIAL_COUNT = 47; // valeur de départ (inscriptions déjà collectées)
+const INITIAL_COUNT = 2; // valeur de départ (inscriptions déjà collectées)
 
 export default {
   async fetch(request, env) {
