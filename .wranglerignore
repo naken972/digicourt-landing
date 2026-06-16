@@ -1,0 +1,11 @@
+# Fichiers à exclure de l'upload Cloudflare Workers
+*.zip
+*.docx
+*.md
+WhatsApp*/
+.git/
+.github/
+guide-domaine-digicourt.md
+SETUP-GUIDE.txt
+DigiCourt_BusinessPlan_V2*
+node_modules/
