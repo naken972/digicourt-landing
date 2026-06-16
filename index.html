@@ -1217,18 +1217,18 @@
     }
     .footer-social a {
       display: flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      border-radius: 10px;
+      width: 42px; height: 42px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.5);
       text-decoration: none;
-      font-size: 1.1rem;
       transition: all 0.2s;
+      opacity: 0.75;
     }
+    .footer-social a svg { width: 22px; height: 22px; }
     .footer-social a:hover {
-      border-color: var(--lime);
-      color: var(--lime);
-      background: rgba(212,247,12,0.07);
+      border-color: rgba(255,255,255,0.35);
+      opacity: 1;
+      transform: translateY(-2px);
     }
 
     /* ════════════════════════════════════════════
@@ -1877,8 +1877,29 @@
     <p>Une question ? On répond sous 24h.</p>
   </div>
   <div class="footer-social">
-    <a href="https://www.instagram.com/digi.court/" target="_blank" rel="noopener" aria-label="Instagram DigiCourt" title="Instagram">📸</a>
-    <a href="https://www.tiktok.com/@digi.court" target="_blank" rel="noopener" aria-label="TikTok DigiCourt" title="TikTok">🎵</a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/digi.court/" target="_blank" rel="noopener" aria-label="Instagram DigiCourt" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+            <stop offset="0%" stop-color="#fdf497"/>
+            <stop offset="5%" stop-color="#fdf497"/>
+            <stop offset="45%" stop-color="#fd5949"/>
+            <stop offset="60%" stop-color="#d6249f"/>
+            <stop offset="90%" stop-color="#285AEB"/>
+          </radialGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#ig-grad)"/>
+        <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.6" fill="none"/>
+        <circle cx="17.3" cy="6.7" r="1.1" fill="white"/>
+      </svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@digi.court" target="_blank" rel="noopener" aria-label="TikTok DigiCourt" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.16 8.16 0 004.78 1.52V6.8a4.85 4.85 0 01-1.01-.11z"/>
+      </svg>
+    </a>
   </div>
   <hr class="footer-divider">
   <div class="footer-bottom">
