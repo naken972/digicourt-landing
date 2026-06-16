@@ -1244,6 +1244,70 @@
     }
 
     /* ════════════════════════════════════════════
+       TÉMOIGNAGES BETA
+    ════════════════════════════════════════════ */
+    .testi-section {
+      background: var(--navy);
+      padding: 6rem 2rem;
+    }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testi-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .testi-card:hover {
+      border-color: rgba(212,247,12,0.3);
+      transform: translateY(-4px);
+    }
+    .testi-stars { color: var(--lime); font-size: 0.9rem; letter-spacing: 2px; }
+    .testi-text {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      flex: 1;
+      font-style: italic;
+    }
+    .testi-text::before { content: '\201C'; }
+    .testi-text::after  { content: '\201D'; }
+    .testi-footer { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.4rem; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--lime));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 0.95rem; color: var(--navy);
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-size: 0.88rem; font-weight: 800; color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .testi-role { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 1px; }
+    .testi-badge {
+      display: inline-block;
+      background: rgba(212,247,12,0.1);
+      border: 1px solid rgba(212,247,12,0.25);
+      color: var(--lime);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      margin-top: 0.5rem;
+      align-self: flex-start;
+    }
+
+    /* ════════════════════════════════════════════
        FAQ
     ════════════════════════════════════════════ */
     .faq-section {
@@ -1852,6 +1916,87 @@
         <div class="proof-stat-num">350M€</div>
         <div class="proof-stat-label">Marché padel FR</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     TÉMOIGNAGES BETA TESTEURS
+════════════════════════════════════════════ -->
+<section class="testi-section" id="avis">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-tag on-dark">Ils ont testé DigiCourt</span>
+      <h2 class="on-dark">Les retours de nos <span class="lime">beta testeurs.</span></h2>
+      <p class="section-sub on-dark">1 mois de test au Castel Padel de Bourges. Des joueurs de tous niveaux. Des retours unanimes.</p>
+    </div>
+    <div class="testi-grid">
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Très bon produit, vraiment pratique à utiliser. Même en joueur occasionnel j'ai pris en main DigiCourt en quelques secondes. Plus besoin de se souvenir du score entre les échanges.</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">Steve C.</div>
+            <div class="testi-role">Joueur occasionnel</div>
+          </div>
+        </div>
+        <span class="testi-badge">Beta testeur · Castel Padel Bourges</span>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Je joue plusieurs fois par semaine en P100 et j'ai tellement aimé DigiCourt que je me suis inscrit en précommande dès la fin de la session. Le bracelet est ultra pratique, le tie-break se gère tout seul. C'est le produit qu'il manquait au padel.</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">N</div>
+          <div>
+            <div class="testi-name">Nicolas N.</div>
+            <div class="testi-role">Joueur régulier · P100 · Précommande confirmée</div>
+          </div>
+        </div>
+        <span class="testi-badge">Beta testeur · Castel Padel Bourges</span>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">J'avais déjà cherché un compteur de score digital pour le padel sans jamais trouver quelque chose d'adapté. DigiCourt répond exactement à ce besoin. L'affichage est parfaitement visible des deux côtés — je suis très satisfait.</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">?</div>
+          <div>
+            <div class="testi-name">Anonyme</div>
+            <div class="testi-role">Joueur régulier</div>
+          </div>
+        </div>
+        <span class="testi-badge">Beta testeur · Castel Padel Bourges</span>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Fini les disputes ! On perdait facilement 5 minutes par match à se mettre d'accord sur le score. Maintenant tout le monde voit la même chose en temps réel. Simple, efficace, indispensable.</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">T</div>
+          <div>
+            <div class="testi-name">Thomas M.</div>
+            <div class="testi-role">Joueur régulier · 3 fois par semaine</div>
+          </div>
+        </div>
+        <span class="testi-badge">Beta testeur · Castel Padel Bourges</span>
+      </div>
+
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Le bracelet télécommande c'est ce que j'ai préféré — on met à jour le score depuis n'importe où sur le terrain sans s'approcher du boîtier. Et franchement ça fait son effet auprès des autres joueurs du club !</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">C</div>
+          <div>
+            <div class="testi-name">Camille R.</div>
+            <div class="testi-role">Joueuse amateur</div>
+          </div>
+        </div>
+        <span class="testi-badge">Beta testeur · Castel Padel Bourges</span>
+      </div>
+
     </div>
   </div>
 </section>
