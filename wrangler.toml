@@ -1,6 +1,16 @@
 name = "digicourt-landing"
-compatibility_date = "2025-06-13"
+compatibility_date = "2026-06-16"
+main = "worker.js"
+
+routes = [
+  { pattern = "digicourt.fr/*", custom_domain = true },
+  { pattern = "www.digicourt.fr/*", custom_domain = true }
+]
 
 [assets]
 directory = "."
 not_found_handling = "404-page"
+
+[[kv_namespaces]]
+binding = "DC_KV"
+id = "ef9fdf76038d4eaf87f651b2aee14f31"
