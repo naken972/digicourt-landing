@@ -2,11 +2,6 @@ name = "digicourt-landing"
 compatibility_date = "2026-06-16"
 main = "worker.js"
 
-routes = [
-  { pattern = "digicourt.fr/*", custom_domain = true },
-  { pattern = "www.digicourt.fr/*", custom_domain = true }
-]
-
 [assets]
 directory = "."
 not_found_handling = "404-page"
