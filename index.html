@@ -55,8 +55,76 @@
       "priceCurrency": "EUR",
       "price": "159",
       "availability": "https://schema.org/PreOrder",
-      "url": "https://digicourt.fr/#email-form"
+      "url": "https://digicourt.fr/#email-form",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "EUR"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "FR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 3,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 5,
+            "unitCode": "DAY"
+          }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "FR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "5",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Steve C." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Très bon produit, vraiment pratique à utiliser. Même en joueur occasionnel j'ai pris en main DigiCourt en quelques secondes. Plus besoin de se souvenir du score entre les échanges."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Nicolas N." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Je joue plusieurs fois par semaine en P100 et j'ai tellement aimé DigiCourt que je me suis inscrit en précommande dès la fin de la session. Le bracelet est ultra pratique. C'est le produit qu'il manquait au padel."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Thomas M." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Fini les disputes ! On perdait facilement 5 minutes par match à se mettre d'accord sur le score. Maintenant tout le monde voit la même chose en temps réel. Simple, efficace, indispensable."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Camille R." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Le bracelet télécommande c'est ce que j'ai préféré, on met à jour le score depuis n'importe où sur le terrain sans s'approcher du boîtier."
+      }
+    ],
     "manufacturer": {
       "@type": "Organization",
       "name": "DigiCourt",
