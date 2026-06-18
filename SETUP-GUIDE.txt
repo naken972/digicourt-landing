@@ -1,0 +1,83 @@
+╔══════════════════════════════════════════════════════════════╗
+║         DigiCourt — Guide de déploiement rapide             ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ÉTAPE 1 — Configurer la capture d'emails (Formspree)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Allez sur https://formspree.io et créez un compte gratuit
+   (plan gratuit = 50 soumissions/mois, largement suffisant pour démarrer)
+
+2. Cliquez "+ New Form", donnez-lui un nom (ex: "DigiCourt Interest")
+
+3. Copiez votre Form ID (ex: xpwzegop)
+
+4. Dans index.html, recherchez "YOUR_FORM_ID" et remplacez-le :
+   AVANT : action="https://formspree.io/f/YOUR_FORM_ID"
+   APRÈS  : action="https://formspree.io/f/xpwzegop"   ← votre vrai ID
+
+5. Les emails arriveront directement sur digicourtcapi@gmail.com
+   (configurez-le dans les Settings de votre form Formspree)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ÉTAPE 2 — Publier sur GitHub
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Via VS Code (terminal intégré) :
+
+  git init
+  git add index.html
+  git commit -m "feat: DigiCourt landing page"
+
+  # Sur GitHub.com → New repository → "digicourt-landing" (public)
+  git remote add origin https://github.com/VOTRE_USERNAME/digicourt-landing.git
+  git branch -M main
+  git push -u origin main
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ÉTAPE 3 — Déployer sur Cloudflare Pages
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Allez sur https://pages.cloudflare.com
+2. "Create a project" → "Connect to Git"
+3. Sélectionnez votre repo GitHub "digicourt-landing"
+4. Réglages :
+   - Framework preset : None
+   - Build command : (laisser vide)
+   - Build output directory : / (ou laisser vide)
+5. Cliquez "Save and Deploy"
+
+→ En 2 minutes : votre page est live sur digicourt.pages.dev
+
+DOMAINE PERSONNALISÉ (optionnel) :
+  Si vous avez un domaine digicourt.fr, vous pouvez le brancher
+  dans Cloudflare Pages > Custom domains > Add domain
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ MISE À JOUR de la page (après déploiement)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Modifiez index.html, puis :
+  git add index.html
+  git commit -m "update: ..."
+  git push
+
+→ Cloudflare redéploie automatiquement en 1-2 minutes.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ VÉRIFICATIONS avant mise en ligne
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ ] Remplacer YOUR_FORM_ID par votre vrai ID Formspree
+[ ] Vérifier que les 2 formulaires Google Forms sont bien publiés
+    (Mode réponse "Tout le monde" dans les paramètres du Form)
+[ ] Tester l'envoi d'email sur la page déployée
+[ ] Tester sur mobile
+
+
+Contact : digicourtcapi@gmail.com
