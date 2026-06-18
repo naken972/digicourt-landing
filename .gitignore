@@ -1,0 +1,21 @@
+# Fichiers personnels / business
+*.zip
+*.docx
+*.xlsx
+*.pdf
+WhatsApp*/
+SETUP-GUIDE.txt
+guide-domaine-digicourt.md
+DigiCourt_BusinessPlan_V2*
+
+# Node
+node_modules/
+
+# Wrangler
+.wrangler/
+.dev.vars
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
