@@ -7,7 +7,7 @@
 
 const FORMSPREE_URL  = 'https://formspree.io/f/mpqnkawk';
 const RESEND_API     = 'https://api.resend.com/emails';
-const FROM_ADDRESS   = 'DigiCourt <onboarding@resend.dev>';
+const FROM_ADDRESS   = 'DigiCourt <hello@digicourt.fr>';
 const REPLY_TO       = 'digicourtcapi@gmail.com';
 const SUBJECT        = '🎾 Vous êtes en avant-première — Offre Early Supporter DigiCourt';
 const CTA_MAILTO     = 'mailto:digicourtcapi@gmail.com?subject=Commande%20DigiCourt%20Early%20Supporter';
