@@ -3,8 +3,11 @@
 *.docx
 *.md
 WhatsApp*/
+.git
 .git/
+**/.git/**
 .github/
+workers/
 guide-domaine-digicourt.md
 SETUP-GUIDE.txt
 DigiCourt_BusinessPlan_V2*
