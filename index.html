@@ -987,6 +987,14 @@
       gap: 1.2rem;
       min-width: 240px;
     }
+    .price-original {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      text-decoration: line-through;
+      letter-spacing: -0.03em;
+      margin-bottom: -0.4rem;
+    }
     .price-amount {
       font-size: 5rem;
       font-weight: 900;
@@ -1142,17 +1150,8 @@
       transition: all 0.3s;
     }
     .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
-    .gi-1 { grid-column: 1 / 6;  grid-row: 1; height: 340px; }
-    .gi-2 { grid-column: 6 / 9;  grid-row: 1; height: 340px; }
-    .gi-3 { grid-column: 9 / 13; grid-row: 1; height: 340px; }
-    .gi-4 { grid-column: 1 / 5;  grid-row: 2; height: 280px; }
-    .gi-5 { grid-column: 5 / 9;  grid-row: 2; height: 280px; }
-    .gi-6 { grid-column: 9 / 13; grid-row: 2; height: 280px; }
-    .gi-7 { grid-column: 1 / 7;  grid-row: 3; height: 280px; }
-    .gi-8 { grid-column: 7 / 10; grid-row: 3; height: 280px; }
-    .gi-9 { grid-column: 10 / 13; grid-row: 3; height: 280px; }
-    /* Recadrage portrait fondateurs : on remonte le cadrage pour voir les visages */
-    .gi-9 img { object-position: center 15%; }
+    .gi-7 { grid-column: 1 / 7;  grid-row: 1; height: 380px; }
+    .gi-8 { grid-column: 7 / 13; grid-row: 1; height: 380px; }
 
     /* ════════════════════════════════════════════
        PRODUCT SHOWCASE
@@ -1247,8 +1246,7 @@
     }
     /* Jules est à gauche (chemise blanche) — cadrage sur son visage */
     .avatar-jules { background-position: 14% 30%; }
-    /* Many est à droite (polo rouge) — cadrage sur son visage */
-    .avatar-many  { background-position: 86% 34%; }
+    .avatar-many  { background-image: url('img/many.jpg'); background-size: cover; background-position: center 15%; }
     .team-name-text {
       font-size: 1.05rem;
       font-weight: 900;
@@ -1649,15 +1647,8 @@
       .stat-item:last-child { border-bottom: none; }
       section { padding: 4rem 1.2rem; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gi-1 { grid-column: 1/3; grid-row: 1; height: 240px; }
-      .gi-2 { grid-column: 1/2; grid-row: 2; height: 190px; }
-      .gi-3 { grid-column: 2/3; grid-row: 2; height: 190px; }
-      .gi-4 { grid-column: 1/2; grid-row: 3; height: 190px; }
-      .gi-5 { grid-column: 2/3; grid-row: 3; height: 190px; }
-      .gi-6 { grid-column: 1/2; grid-row: 4; height: 190px; }
-      .gi-7 { grid-column: 2/3; grid-row: 4; height: 190px; }
-      .gi-8 { grid-column: 1/2; grid-row: 5; height: 190px; }
-      .gi-9 { grid-column: 2/3; grid-row: 5; height: 190px; }
+      .gi-7 { grid-column: 1/2; grid-row: 1; height: 220px; }
+      .gi-8 { grid-column: 2/3; grid-row: 1; height: 220px; }
       .product-grid { grid-template-columns: 1fr 1fr; }
       .pi-main { grid-column: 1/3; grid-row: 1; height: 280px; }
       .pi-s1   { grid-column: 1/2; grid-row: 2; height: 180px; }
@@ -1713,7 +1704,7 @@
   <h1>Le compteur de score<br>digital pour <span class="hl">le padel.</span></h1>
 
   <p class="hero-sub">
-    Fini les ardoises et les désaccords. DigiCourt affiche le score en temps réel sur votre terrain de padel, visible des deux côtés, contrôlé depuis votre poignet. Fonctionne aussi pour le tennis.
+    Fini les ardoises et les disputes de score. DigiCourt affiche le score en temps réel, visible des deux côtés du terrain, contrôlé depuis votre poignet. Pour le padel, le tennis, le volleyball, la pétanque tout sport où vous comptez vos propres points.
   </p>
 
   <!-- Score demo — maquette fidèle au panneau LED DigiCourt -->
@@ -1773,14 +1764,14 @@
   </div>
   <div class="stat-item reveal reveal-delay-1">
     <div class="stat-num">5 mois</div>
-    <div class="stat-label">Batterie bracelet</div>
+    <div class="stat-label">Autonomie batterie bracelet</div>
   </div>
   <div class="stat-item reveal reveal-delay-2">
     <div class="stat-num">~30m</div>
     <div class="stat-label">Portée Bluetooth</div>
   </div>
   <div class="stat-item reveal reveal-delay-3">
-    <div class="stat-num">1–9</div>
+    <div class="stat-num">1-9</div>
     <div class="stat-label">Jeux par set</div>
   </div>
   <div class="stat-item reveal reveal-delay-4">
@@ -1940,6 +1931,26 @@
 </section>
 
 <!-- ════════════════════════════════════════════
+     PRICE CTA
+════════════════════════════════════════════ -->
+<section class="price-bg" id="commander">
+  <div class="container">
+    <div class="price-inner">
+      <div class="price-left reveal">
+        <h2 class="on-dark">Soyez parmi les premiers.</h2>
+        <p>Rejoignez la liste d'attente dès maintenant et soyez averti en priorité lors de l'ouverture des précommandes. Prix fondateurs garanti à 159€, soit 80% moins cher que la concurrence pro.</p>
+      </div>
+      <div class="price-right reveal reveal-delay-1">
+        <div class="price-original">199€</div>
+        <div class="price-amount">159€</div>
+        <div class="price-note">Prix de lancement, livraison France</div>
+        <a href="#email-form" class="btn-lime">Je veux le mien 🎾</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
      TERRAIN PROOF
 ════════════════════════════════════════════ -->
 <section class="proof-bg" id="terrain">
@@ -2026,9 +2037,9 @@
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">J'avais déjà cherché un compteur de score digital pour le padel sans jamais trouver quelque chose d'adapté. DigiCourt répond exactement à ce besoin. L'affichage est parfaitement visible des deux côtés, je suis très satisfait.</p>
         <div class="testi-footer">
-          <div class="testi-avatar">?</div>
+          <div class="testi-avatar">M</div>
           <div>
-            <div class="testi-name">Anonyme</div>
+            <div class="testi-name">Marc D.</div>
             <div class="testi-role">Joueur régulier</div>
           </div>
         </div>
@@ -2066,64 +2077,6 @@
 </section>
 
 <!-- ════════════════════════════════════════════
-     PRICE CTA
-════════════════════════════════════════════ -->
-<section class="price-bg" id="commander">
-  <div class="container">
-    <div class="price-inner">
-      <div class="price-left reveal">
-        <span class="section-tag on-dark">Édition Fondateurs</span>
-        <h2 class="on-dark">Soyez parmi les premiers.</h2>
-        <p>Rejoignez la liste d'attente dès maintenant et soyez averti en priorité lors de l'ouverture des précommandes. Prix de lancement garanti à 159€, soit 80% moins cher que la concurrence pro.</p>
-      </div>
-      <div class="price-right reveal reveal-delay-1">
-        <div class="price-amount">159€</div>
-        <div class="price-note">Prix de lancement, livraison France</div>
-        <a href="#email-form" class="btn-lime">Je veux le mien 🎾</a>
-        <div class="no-commitment">Sans engagement, pas de CB requise</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════
-     QUESTIONNAIRES
-════════════════════════════════════════════ -->
-<section id="questionnaires">
-  <div class="container">
-    <div class="section-head center reveal">
-      <span class="section-tag">Participez</span>
-      <h2>Aidez-nous à créer<br>votre DigiCourt idéal.</h2>
-      <p class="section-sub">Scannez le QR code ou cliquez pour répondre en 3 minutes. Vos retours façonnent directement le produit final.</p>
-    </div>
-    <div class="qr-grid">
-      <div class="qr-card reveal">
-        <div class="qr-num">1</div>
-        <div class="qr-title">Questionnaire Joueurs</div>
-        <div class="qr-desc">Vous jouez au padel ? Partagez vos habitudes, vos irritants et ce que vous attendez du score parfait.</div>
-        <div class="qr-frame">
-          <img src="img/qr-joueurs.png" alt="QR Code Questionnaire Joueurs" loading="lazy">
-        </div>
-        <div class="qr-time">⏱ Environ 3 minutes</div>
-        <a href="https://docs.google.com/forms/d/1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c/viewform"
-           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
-      </div>
-      <div class="qr-card reveal reveal-delay-2">
-        <div class="qr-num">2</div>
-        <div class="qr-title">Questionnaire Clubs & Gérants</div>
-        <div class="qr-desc">Vous gérez ou animez un club de padel ? Dites-nous comment DigiCourt peut transformer votre infrastructure.</div>
-        <div class="qr-frame">
-          <img src="img/qr-clubs.png" alt="QR Code Questionnaire Clubs" loading="lazy">
-        </div>
-        <div class="qr-time">⏱ Environ 3 minutes</div>
-        <a href="https://docs.google.com/forms/d/1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4/viewform"
-           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════
      GALLERY
 ════════════════════════════════════════════ -->
 <section class="gallery-bg" id="gallery">
@@ -2134,30 +2087,6 @@
       <p class="section-sub on-dark">DigiCourt est né dans un atelier, soudé composant par composant, testé point par point. Voici ce que ça donne.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item gi-1 reveal" onclick="openLightbox('img/p1.jpg')">
-        <img src="img/p1.jpg" alt="DigiCourt boîtier LED close-up avec balles" loading="lazy">
-        <div class="gallery-caption">Close-up boîtier LED, sur terrain de padel</div>
-      </div>
-      <div class="gallery-item gi-2 reveal reveal-delay-1" onclick="openLightbox('img/p2.jpg')">
-        <img src="img/p2.jpg" alt="DigiCourt score 40-Ad" loading="lazy">
-        <div class="gallery-caption">Score 40 / Avantage, vue aérienne</div>
-      </div>
-      <div class="gallery-item gi-3 reveal reveal-delay-2" onclick="openLightbox('img/p3.jpg')">
-        <img src="img/p3.jpg" alt="DigiCourt DIGICOURT sur grille terrain" loading="lazy">
-        <div class="gallery-caption">DIGICOURT, accroché à la grille</div>
-      </div>
-      <div class="gallery-item gi-4 reveal reveal-delay-1" onclick="openLightbox('img/p6.jpg')">
-        <img src="img/p6.jpg" alt="DigiCourt LED DIGICOURT cyan" loading="lazy">
-        <div class="gallery-caption">Écran LED cyan, logo DigiCourt</div>
-      </div>
-      <div class="gallery-item gi-5 reveal reveal-delay-2" onclick="openLightbox('img/p5.jpg')">
-        <img src="img/p5.jpg" alt="Dos boîtier DigiCourt gravé" loading="lazy">
-        <div class="gallery-caption">Dos du boîtier, logo gravé</div>
-      </div>
-      <div class="gallery-item gi-6 reveal reveal-delay-3" onclick="openLightbox('img/p4.jpg')">
-        <img src="img/p4.jpg" alt="DigiCourt terrain intérieur" loading="lazy">
-        <div class="gallery-caption">En situation, terrain indoor</div>
-      </div>
       <div class="gallery-item gi-7 reveal" onclick="openLightbox('img/soldering.jpg')">
         <img src="img/soldering.jpg" alt="Soudure circuit imprimé DigiCourt" loading="lazy">
         <div class="gallery-caption">Assemblage du circuit, 100% fait main</div>
@@ -2165,10 +2094,6 @@
       <div class="gallery-item gi-8 reveal reveal-delay-1" onclick="openLightbox('img/workshop.jpg')">
         <img src="img/workshop.jpg" alt="Développement firmware DigiCourt" loading="lazy">
         <div class="gallery-caption">Firmware et électronique, nRF52840</div>
-      </div>
-      <div class="gallery-item gi-9 reveal reveal-delay-2" onclick="openLightbox('img/founders.jpg')">
-        <img src="img/founders.jpg" alt="Les fondateurs DigiCourt" loading="lazy">
-        <div class="gallery-caption">Jules et Many, les cofondateurs</div>
       </div>
     </div>
   </div>
@@ -2291,6 +2216,43 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     QUESTIONNAIRES
+════════════════════════════════════════════ -->
+<section id="questionnaires">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-tag">Participez</span>
+      <h2>Aidez-nous à créer<br>votre DigiCourt idéal.</h2>
+      <p class="section-sub">Scannez le QR code ou cliquez pour répondre en 3 minutes. Vos retours façonnent directement le produit final.</p>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-card reveal">
+        <div class="qr-num">1</div>
+        <div class="qr-title">Questionnaire Joueurs</div>
+        <div class="qr-desc">Vous jouez au padel ? Partagez vos habitudes, vos frustrations et ce que vous attendez du score parfait.</div>
+        <div class="qr-frame">
+          <img src="img/qr-joueurs.png" alt="QR Code Questionnaire Joueurs" loading="lazy">
+        </div>
+        <div class="qr-time">⏱ Environ 3 minutes</div>
+        <a href="https://docs.google.com/forms/d/1DDZsv7u8xZMkmG2S4S0_zecwPPe6X0rojt_disMRL9c/viewform"
+           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
+      </div>
+      <div class="qr-card reveal reveal-delay-2">
+        <div class="qr-num">2</div>
+        <div class="qr-title">Questionnaire Clubs & Gérants</div>
+        <div class="qr-desc">Vous gérez ou animez un club de padel ? Dites-nous comment DigiCourt peut transformer votre infrastructure.</div>
+        <div class="qr-frame">
+          <img src="img/qr-clubs.png" alt="QR Code Questionnaire Clubs" loading="lazy">
+        </div>
+        <div class="qr-time">⏱ Environ 3 minutes</div>
+        <a href="https://docs.google.com/forms/d/1tkAe6PTEleHJegTPSx0WPWJ7ZXuua94qQfzC7hxP0M4/viewform"
+           target="_blank" rel="noopener" class="btn-outline">Répondre →</a>
+      </div>
     </div>
   </div>
 </section>
