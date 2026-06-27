@@ -17,9 +17,9 @@ cd workers
 wrangler deploy
 ```
 
-Wrangler retourne l'URL du Worker, par exemple :
+URL du Worker déployé :
 ```
-https://digicourt-email-worker.<ton-sous-domaine>.workers.dev
+https://digicourt-email-worker.devopspages.workers.dev
 ```
 
 ---
