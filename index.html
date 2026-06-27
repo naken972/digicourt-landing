@@ -2585,6 +2585,13 @@ document.querySelectorAll('.faq-question').forEach(btn => {
       'qr.t1': 'Player Survey', 'qr.d1': 'Do you play padel? Share your habits, frustrations and what you expect from the perfect score.', 'qr.time1': '⏱ About 3 minutes', 'qr.btn1': 'Answer →',
       'qr.t2': 'Club & Manager Survey', 'qr.d2': 'Do you run or manage a padel club? Tell us how DigiCourt can transform your facility.', 'qr.time2': '⏱ About 3 minutes', 'qr.btn2': 'Answer →',
       'footer.tag': 'The digital score for padel & racket sports', 'footer.contact.p': 'A question? We reply within 24h.',
+      't1': 'Great product, really easy to use. Even as an occasional player I picked up DigiCourt in seconds. No more trying to remember the score between rallies.',
+      't2': 'I play several times a week at P100 level and I loved DigiCourt so much I pre-ordered right after the session. The wristband is incredibly convenient, tie-breaks are handled automatically. This is the product padel was missing.',
+      't3': 'I had already searched for a digital score counter for padel without ever finding anything suitable. DigiCourt is exactly what I needed. The display is perfectly visible from both sides — very satisfied.',
+      't4': 'No more arguments! We easily wasted 5 minutes per match trying to agree on the score. Now everyone sees the same thing in real time. Simple, effective, indispensable.',
+      't5': 'The wristband remote is my favourite part — you update the score from anywhere on the court without walking to the unit. And honestly it turns heads among other players at the club!',
+      'tr1': 'Occasional player', 'tr2': 'Regular player, P100, pre-order confirmed', 'tr3': 'Regular player', 'tr4': 'Regular player, 3 times a week', 'tr5': 'Amateur player',
+      'tb': 'Beta tester, Castel Padel Bourges',
     },
     es: {
       'hero.h1': 'El marcador digital<br>para <span class="hl">el pádel.</span>',
@@ -2642,6 +2649,13 @@ document.querySelectorAll('.faq-question').forEach(btn => {
       'qr.t1': 'Encuesta Jugadores', 'qr.d1': '¿Juegas al pádel? Comparte tus hábitos, frustraciones y lo que esperas del marcador perfecto.', 'qr.time1': '⏱ Unos 3 minutos', 'qr.btn1': 'Responder →',
       'qr.t2': 'Encuesta Clubes y Gestores', 'qr.d2': '¿Gestionas un club de pádel? Dinos cómo DigiCourt puede transformar tu instalación.', 'qr.time2': '⏱ Unos 3 minutos', 'qr.btn2': 'Responder →',
       'footer.tag': 'El marcador digital para pádel y deportes de raqueta', 'footer.contact.p': '¿Una pregunta? Respondemos en menos de 24h.',
+      't1': 'Gran producto, muy práctico de usar. Incluso como jugador ocasional aprendí a usar DigiCourt en segundos. Ya no hay que recordar el marcador entre los puntos.',
+      't2': 'Juego varias veces por semana en P100 y me encantó tanto DigiCourt que me apunté a la precompra justo al terminar la sesión. La pulsera es increíblemente cómoda, el tie-break se gestiona solo. Es el producto que le faltaba al pádel.',
+      't3': 'Ya había buscado un marcador digital para pádel sin encontrar nunca nada adecuado. DigiCourt responde exactamente a esa necesidad. La pantalla es perfectamente visible desde ambos lados — muy satisfecho.',
+      't4': '¡Se acabaron las discusiones! Perdíamos fácilmente 5 minutos por partido intentando ponernos de acuerdo en el marcador. Ahora todo el mundo ve lo mismo en tiempo real. Simple, eficaz, imprescindible.',
+      't5': 'La pulsera mando a distancia es lo que más me ha gustado — actualizas el marcador desde cualquier punto de la pista sin acercarte a la unidad. ¡Y la verdad es que llama la atención entre los demás jugadores del club!',
+      'tr1': 'Jugador ocasional', 'tr2': 'Jugador regular, P100, precompra confirmada', 'tr3': 'Jugador regular', 'tr4': 'Jugador regular, 3 veces por semana', 'tr5': 'Jugadora amateur',
+      'tb': 'Beta tester, Castel Padel Bourges',
     }
   };
 
@@ -2688,6 +2702,9 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     ['.qr-desc', ['qr.d1','qr.d2'], false],
     ['.qr-time', ['qr.time1','qr.time2'], false],
     ['.qr-card .btn-outline', ['qr.btn1','qr.btn2'], false],
+    ['.testi-text', ['t1','t2','t3','t4','t5'], false],
+    ['.testi-role', ['tr1','tr2','tr3','tr4','tr5'], false],
+    ['.testi-badge', ['tb','tb','tb','tb','tb'], false],
   ];
 
   const orig = {};
