@@ -1,0 +1,7 @@
+name             = "digicourt-email-worker"
+compatibility_date = "2026-06-27"
+main             = "email-autoresponse.js"
+
+# Aucun binding KV ni Assets — ce Worker ne fait que recevoir et envoyer.
+# Le secret RESEND_API_KEY est injecté via :
+#   wrangler secret put RESEND_API_KEY
