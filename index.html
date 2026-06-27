@@ -1658,6 +1658,12 @@
       .pi-b3   { grid-column: 1/3; grid-row: 4; height: 180px; }
       h1 { line-height: 1.02; }
     }
+    /* ─── LANG SWITCHER ─── */
+    .lang-switcher { display: flex; align-items: center; gap: 0.2rem; margin-left: 1rem; }
+    .lang-btn { background: none; border: none; color: rgba(255,255,255,0.38); font-size: 0.7rem; font-weight: 700; font-family: inherit; cursor: pointer; padding: 0.2rem 0.35rem; border-radius: 4px; letter-spacing: 0.07em; transition: color 0.2s; }
+    .lang-btn:hover { color: rgba(255,255,255,0.85); }
+    .lang-btn.active { color: var(--lime); }
+    .lang-sep { color: rgba(255,255,255,0.15); font-size: 0.55rem; user-select: none; }
   </style>
 </head>
 <body>
@@ -1680,6 +1686,13 @@
     <li><a href="#gallery">Photos</a></li>
     <li><a href="#email-form" class="nav-cta">Ça m'intéresse !</a></li>
   </ul>
+  <div class="lang-switcher" aria-label="Langue">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
   <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1692,6 +1705,13 @@
   <a href="#terrain" class="mob-link">Terrain</a>
   <a href="#gallery" class="mob-link">Photos</a>
   <a href="#email-form" class="mob-cta">Ça m'intéresse ! 🎾</a>
+  <div class="lang-switcher" style="justify-content:center;margin:0.8rem 0 0;">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="es">ES</button>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════
@@ -2501,6 +2521,223 @@ document.querySelectorAll('.faq-question').forEach(btn => {
       btn.disabled = false;
       alert('Une erreur est survenue. Contactez-nous à digicourtcapi@gmail.com');
     }
+  });
+})();
+</script>
+
+<!-- ─── I18N SWITCHER ─── -->
+<script>
+(function () {
+  const trans = {
+    en: {
+      'hero.h1': 'The digital score counter<br>for <span class="hl">padel.</span>',
+      'hero.sub': 'No more chalkboards and score disputes. DigiCourt displays the score in real time, visible from both sides of the court, controlled from your wrist. For padel, tennis, volleyball, pétanque — any sport where you keep your own score.',
+      'hero.btn': "I'm interested! 🎾",
+      'nav.features': 'Features', 'nav.how': 'How it works', 'nav.terrain': 'Field tests', 'nav.photos': 'Photos', 'nav.cta': "I'm interested!", 'nav.cta.mob': "I'm interested! 🎾",
+      'stats.l1': 'Screen battery life', 'stats.l2': 'Wristband battery', 'stats.l3': 'Bluetooth range', 'stats.l4': 'Games per set', 'stats.l5': 'Launch price',
+      'product.tag': 'The product', 'product.h2': 'DigiCourt in <span class="lime">action.</span>', 'product.sub': 'The LED display unit and its Bluetooth wristband remote, handmade and field-tested.',
+      'p.cap1': 'DigiCourt unit, LED matrix lit up', 'p.cap2': 'Startup — cyan LED screen', 'p.cap3': 'Unit — compact & robust design', 'p.cap4': 'Score 40 / Advantage live', 'p.cap5': 'Mounted on the grid — indoor court', 'p.cap6': 'In action — professional padel court',
+      'problem.tag': 'The problem', 'problem.h2': 'The score is<br><span class="blue">the one dispute</span> every match.', 'problem.divider': 'The DigiCourt solution',
+      'pb1': '<span class="icon">✕</span>Chalkboard unreadable from the back of the court',
+      'pb2': '<span class="icon">✕</span>Frequent disagreements on the current score',
+      'pb3': '<span class="icon">✕</span>Smartphone apps not suited for play',
+      'pb4': '<span class="icon">✕</span>Concentration broken at every disputed point',
+      'pg1': '<span class="icon">✓</span>LED display visible from both sides of the court',
+      'pg2': '<span class="icon">✓</span>Bluetooth wristband remote on your wrist',
+      'pg3': '<span class="icon">✓</span>FIP rules built-in: Ad, Punto, Oro…',
+      'pg4': '<span class="icon">✓</span>Designed and tested by real padel players',
+      'features.tag': 'Features', 'features.h2': 'Built for players,<br>by players.', 'features.sub': 'Every detail was designed on the court to eliminate score friction and let you focus on your game.',
+      'f1.pill': 'Battery', 'f1.title': '20h screen battery life', 'f1.desc': 'The unit lasts a full day of intense play. The wristband remote runs 5 months without charging. Universal USB-C charging.',
+      'f2.pill': 'Connectivity', 'f2.title': 'Ultra-reliable Bluetooth BLE', 'f2.desc': 'nRF52840 chip for a stable connection up to ~30 meters. Near-zero latency, no dropouts mid-rally.',
+      'f3.pill': 'Game rules', 'f3.title': '4 scoring modes', 'f3.desc': 'Ad, Punto, Oro or 3-Ad. Sets from 1 to 9 games. Official FIP rules built in.',
+      'f4.pill': 'Display', 'f4.title': 'Adjustable brightness', 'f4.desc': 'Adapt screen intensity to your environment: dim indoors or full sunlight. Always perfectly readable.',
+      'f5.pill': 'Double-sided', 'f5.title': 'Visible from both sides', 'f5.desc': 'Readable from both sides of the court. Perfect for matches, clubs and tournaments. No more score disputes.',
+      'f6.pill': 'Hardware', 'f6.title': 'USB-C charging', 'f6.desc': 'One universal cable does the job. No proprietary adapter. Works with all your existing chargers.',
+      'how.tag': 'How it works', 'how.h2': 'Simple as a <span class="lime">winning point.</span>', 'how.sub': 'Ready to play in 3 seconds. No app, no complex setup.',
+      's1.title': 'Set up the unit', 's1.desc': 'Mount the display on your court edge. Switch it on. Ready in 3 seconds.',
+      's2.title': 'Choose your rules', 's2.desc': 'Select the game mode (Ad, Punto, Oro…) and number of games per set from the remote.',
+      's3.title': 'Play, effortlessly', 's3.desc': '3 physical buttons on your wrist. Press after each point, the score appears instantly.',
+      'price.tag': 'Founders Edition', 'price.h2': 'Be among the first.',
+      'price.p': 'Join the waiting list now and be notified first when pre-orders open. Founders price guaranteed at 159€ — 80% cheaper than professional alternatives.',
+      'price.note': 'Launch price, France delivery', 'price.btn': 'I want mine 🎾', 'price.nocommit': 'No commitment, no credit card required',
+      'proof.tag': 'Field tested', 'proof.h2': 'Validated by real players,<br>in real clubs.', 'proof.sub': 'DigiCourt was tested for 1 month at Castel Padel in Bourges with real players. The feedback speaks for itself.',
+      'proof.q1': "The system works well, it's practical to use, and it addresses a real problem that players face every match. Several players said they never want to play without it again.",
+      'proof.a1': 'Castel Padel, Bourges', 'proof.r1': 'Partner club / 1-month field test',
+      'proof.q2': 'The concept is relevant and we expressed our interest in a future partnership. A tool that truly meets the needs of clubs and serious players.',
+      'proof.a2': 'Padel Club, Blois', 'proof.r2': 'Partner club / Partnership interest confirmed',
+      'proof.sl1': 'Padel players in France', 'proof.sl2': 'Growth / year', 'proof.sl3': 'Courts in France', 'proof.sl4': 'Padel market FR',
+      'testi.tag': 'They tested DigiCourt', 'testi.h2': 'Feedback from our <span class="lime">beta testers.</span>', 'testi.sub': '1 month of testing at Castel Padel in Bourges. Players of all levels. Unanimous feedback.',
+      'gallery.tag': 'Behind the scenes', 'gallery.h2': 'Handmade,<br>with <span class="lime">passion.</span>', 'gallery.sub': 'DigiCourt was born in a workshop, soldered component by component, tested point by point.',
+      'gal.cap1': 'Circuit assembly, 100% handmade', 'gal.cap2': 'Firmware and electronics, nRF52840',
+      'team.tag': 'The founding team', 'team.h2': 'Born on the court.<br><span class="blue">Passionate about tech.</span>', 'team.sub': 'Two engineering students at INSA Centre Val de Loire, friends, padel players, and founders of a startup reinventing the score.',
+      'team.jules.role': 'Co-founder, CTO', 'team.jules.bio': 'Hardware design, nRF52840 firmware, prototyping and CE certification. Passionate about embedded electronics, he built DigiCourt from scratch and plays padel on the courts he equips.',
+      'team.many.role': 'Co-founder, CEO', 'team.many.bio': 'Commercial strategy, marketing and club partnerships. Engineering student in work-study, he drives the business vision with unique field knowledge and a real love for padel.',
+      'faq.tag': 'FAQ', 'faq.h2': 'Everything about DigiCourt,<br>the <span class="blue">padel score counter.</span>', 'faq.sub': 'Questions about our digital counter for padel and tennis? We have the answers.',
+      'faq.q1': 'What is a digital score counter for padel? <span class="faq-icon">+</span>',
+      'faq.q2': 'How do you count points in padel? <span class="faq-icon">+</span>',
+      'faq.q3': 'Does DigiCourt work for other sports? <span class="faq-icon">+</span>',
+      'faq.q4': 'What is the price of the DigiCourt counter? <span class="faq-icon">+</span>',
+      'faq.q5': 'How do you install DigiCourt on a padel court? <span class="faq-icon">+</span>',
+      'faq.q6': 'What is the battery life of the DigiCourt counter? <span class="faq-icon">+</span>',
+      'faq.q7': 'Is DigiCourt the only digital counter for padel? <span class="faq-icon">+</span>',
+      'faq.q8': 'Where can I buy DigiCourt? <span class="faq-icon">+</span>',
+      'quest.tag': 'Participate', 'quest.h2': 'Help us create<br>your ideal DigiCourt.', 'quest.sub': 'Scan the QR code or click to respond in 3 minutes. Your feedback directly shapes the final product.',
+      'qr.t1': 'Player Survey', 'qr.d1': 'Do you play padel? Share your habits, frustrations and what you expect from the perfect score.', 'qr.time1': '⏱ About 3 minutes', 'qr.btn1': 'Answer →',
+      'qr.t2': 'Club & Manager Survey', 'qr.d2': 'Do you run or manage a padel club? Tell us how DigiCourt can transform your facility.', 'qr.time2': '⏱ About 3 minutes', 'qr.btn2': 'Answer →',
+      'footer.tag': 'The digital score for padel & racket sports', 'footer.contact.p': 'A question? We reply within 24h.',
+    },
+    es: {
+      'hero.h1': 'El marcador digital<br>para <span class="hl">el pádel.</span>',
+      'hero.sub': 'Adiós a las pizarras y los desacuerdos. DigiCourt muestra el marcador en tiempo real, visible desde ambos lados de la pista, controlado desde tu muñeca. Para pádel, tenis, voleibol, petanca — cualquier deporte donde llevéis vosotros el marcador.',
+      'hero.btn': '¡Me interesa! 🎾',
+      'nav.features': 'Funcionalidades', 'nav.how': 'Cómo funciona', 'nav.terrain': 'Pruebas', 'nav.photos': 'Fotos', 'nav.cta': '¡Me interesa!', 'nav.cta.mob': '¡Me interesa! 🎾',
+      'stats.l1': 'Autonomía pantalla', 'stats.l2': 'Autonomía pulsera', 'stats.l3': 'Alcance Bluetooth', 'stats.l4': 'Juegos por set', 'stats.l5': 'Precio lanzamiento',
+      'product.tag': 'El producto', 'product.h2': 'DigiCourt en <span class="lime">acción.</span>', 'product.sub': 'El marcador LED y su pulsera mando a distancia Bluetooth, fabricados a mano y probados sobre el terreno.',
+      'p.cap1': 'Unidad DigiCourt, matriz LED encendida', 'p.cap2': 'Arranque — pantalla LED cyan', 'p.cap3': 'Unidad — diseño compacto y robusto', 'p.cap4': 'Marcador 40 / Ventaja en directo', 'p.cap5': 'Instalado en la valla — pista interior', 'p.cap6': 'En acción — pista de pádel profesional',
+      'problem.tag': 'El problema', 'problem.h2': 'El marcador es<br><span class="blue">el único conflicto</span> en cada partido.', 'problem.divider': 'La solución DigiCourt',
+      'pb1': '<span class="icon">✕</span>Pizarra ilegible desde el fondo de la pista',
+      'pb2': '<span class="icon">✕</span>Frecuentes desacuerdos sobre el marcador',
+      'pb3': '<span class="icon">✕</span>Aplicaciones de móvil no adaptadas al juego',
+      'pb4': '<span class="icon">✕</span>Concentración rota en cada punto disputado',
+      'pg1': '<span class="icon">✓</span>Pantalla LED visible desde ambos lados de la pista',
+      'pg2': '<span class="icon">✓</span>Pulsera mando a distancia Bluetooth en la muñeca',
+      'pg3': '<span class="icon">✓</span>Reglas FIP integradas: Ad, Punto, Oro…',
+      'pg4': '<span class="icon">✓</span>Diseñado y probado por jugadores reales de pádel',
+      'features.tag': 'Funcionalidades', 'features.h2': 'Pensado para jugadores,<br>por jugadores.', 'features.sub': 'Cada detalle fue diseñado sobre la pista para eliminar los conflictos de marcador y dejarte concentrado en tu juego.',
+      'f1.pill': 'Batería', 'f1.title': '20h de autonomía', 'f1.desc': 'La unidad aguanta todo un día de juego intenso. La pulsera dura 5 meses sin recarga. Carga USB-C universal.',
+      'f2.pill': 'Conectividad', 'f2.title': 'Bluetooth BLE ultra-fiable', 'f2.desc': 'Chip nRF52840 para una conexión estable hasta ~30 metros. Latencia casi nula, sin cortes.',
+      'f3.pill': 'Reglas de juego', 'f3.title': '4 modos de marcador', 'f3.desc': 'Ad infinita, Punto, Oro o 3 Ad. Sets de 1 a 9 juegos. Reglamento FIP integrado.',
+      'f4.pill': 'Pantalla', 'f4.title': 'Brillo ajustable', 'f4.desc': 'Adapta la intensidad según el entorno: interior tenue o pleno sol. Siempre perfectamente legible.',
+      'f5.pill': 'Doble cara', 'f5.title': 'Visible desde ambos lados', 'f5.desc': 'Legible desde los dos lados de la pista. Ideal para partidos, clubes y torneos. Sin más conflictos de marcador.',
+      'f6.pill': 'Hardware', 'f6.title': 'Carga USB-C', 'f6.desc': 'Un cable universal es suficiente. Sin adaptador propietario. Compatible con todos tus cargadores.',
+      'how.tag': 'Uso', 'how.h2': 'Simple como un punto <span class="lime">ganador.</span>', 'how.sub': 'Listos para jugar en 3 segundos. Sin aplicación, sin configuración compleja.',
+      's1.title': 'Coloca la unidad', 's1.desc': 'Fija el marcador en el borde de tu pista. Enciéndelo con un simple interruptor. Listo en 3 segundos.',
+      's2.title': 'Elige tus reglas', 's2.desc': 'Selecciona el modo de juego (Ad, Punto, Oro…) y el número de juegos por set desde el mando.',
+      's3.title': 'Juega, sin pensar', 's3.desc': '3 botones físicos en la muñeca. Pulsa después de cada punto, el marcador aparece al instante.',
+      'price.tag': 'Edición Fundadores', 'price.h2': 'Sé de los primeros.',
+      'price.p': 'Únete a la lista de espera ahora y sé avisado primero cuando abran los pedidos anticipados. Precio fundador garantizado a 159€ — 80% más barato que la competencia profesional.',
+      'price.note': 'Precio de lanzamiento, envío Francia', 'price.btn': 'Quiero el mío 🎾', 'price.nocommit': 'Sin compromiso, sin tarjeta requerida',
+      'proof.tag': 'Probado sobre el terreno', 'proof.h2': 'Validado por jugadores reales,<br>en clubes reales.', 'proof.sub': 'DigiCourt fue probado durante 1 mes en el Castel Padel de Bourges con jugadores reales. Los resultados hablan por sí solos.',
+      'proof.q1': 'El sistema funciona bien, es práctico de usar y responde a un problema real que los jugadores viven en cada partido. Varios jugadores dijeron que ya no quieren jugar sin él.',
+      'proof.a1': 'Castel Padel, Bourges', 'proof.r1': 'Club socio / Test 1 mes',
+      'proof.q2': 'El concepto es relevante y hemos manifestado nuestro interés en una futura asociación. Una herramienta que realmente responde a las necesidades de los clubes y jugadores serios.',
+      'proof.a2': 'Club de Pádel, Blois', 'proof.r2': 'Club socio / Interés de asociación confirmado',
+      'proof.sl1': 'Jugadores de pádel en Francia', 'proof.sl2': 'Crecimiento / año', 'proof.sl3': 'Pistas en Francia', 'proof.sl4': 'Mercado pádel FR',
+      'testi.tag': 'Han probado DigiCourt', 'testi.h2': 'Opiniones de nuestros <span class="lime">beta testers.</span>', 'testi.sub': '1 mes de pruebas en Castel Padel de Bourges. Jugadores de todos los niveles. Opiniones unánimes.',
+      'gallery.tag': 'Entre bastidores', 'gallery.h2': 'Fabricado a mano,<br>con <span class="lime">pasión.</span>', 'gallery.sub': 'DigiCourt nació en un taller, soldado componente a componente, probado punto a punto.',
+      'gal.cap1': 'Montaje del circuito, 100% hecho a mano', 'gal.cap2': 'Firmware y electrónica, nRF52840',
+      'team.tag': 'El equipo fundador', 'team.h2': 'Nacidos en la pista.<br><span class="blue">Apasionados por la tecnología.</span>', 'team.sub': 'Dos estudiantes de ingeniería en la INSA Centre Val de Loire, amigos, jugadores de pádel y fundadores de una startup que reinventa el marcador.',
+      'team.jules.role': 'Co-fundador, CTO', 'team.jules.bio': 'Diseño hardware, firmware nRF52840, prototipado y certificación CE. Apasionado por la electrónica embebida, construyó DigiCourt desde cero y juega al pádel en las pistas que equipa.',
+      'team.many.role': 'Co-fundador, CEO', 'team.many.bio': 'Estrategia comercial, marketing y alianzas con clubes. Estudiante de ingeniería en alternancia, lidera la visión de negocio con un conocimiento único del terreno y un amor real por el pádel.',
+      'faq.tag': 'Preguntas frecuentes', 'faq.h2': 'Todo sobre DigiCourt,<br>el <span class="blue">marcador digital de pádel.</span>', 'faq.sub': '¿Preguntas sobre nuestro marcador digital para pádel y tenis? Tenemos las respuestas.',
+      'faq.q1': '¿Qué es un marcador digital para pádel? <span class="faq-icon">+</span>',
+      'faq.q2': '¿Cómo se cuentan los puntos en pádel? <span class="faq-icon">+</span>',
+      'faq.q3': '¿DigiCourt funciona para otros deportes? <span class="faq-icon">+</span>',
+      'faq.q4': '¿Cuál es el precio del marcador DigiCourt? <span class="faq-icon">+</span>',
+      'faq.q5': '¿Cómo se instala DigiCourt en una pista de pádel? <span class="faq-icon">+</span>',
+      'faq.q6': '¿Cuánta autonomía tiene el marcador DigiCourt? <span class="faq-icon">+</span>',
+      'faq.q7': '¿Es DigiCourt el único marcador digital para pádel? <span class="faq-icon">+</span>',
+      'faq.q8': '¿Dónde comprar DigiCourt? <span class="faq-icon">+</span>',
+      'quest.tag': 'Participa', 'quest.h2': 'Ayúdanos a crear<br>tu DigiCourt ideal.', 'quest.sub': 'Escanea el código QR o haz clic para responder en 3 minutos. Tus opiniones dan forma directamente al producto final.',
+      'qr.t1': 'Encuesta Jugadores', 'qr.d1': '¿Juegas al pádel? Comparte tus hábitos, frustraciones y lo que esperas del marcador perfecto.', 'qr.time1': '⏱ Unos 3 minutos', 'qr.btn1': 'Responder →',
+      'qr.t2': 'Encuesta Clubes y Gestores', 'qr.d2': '¿Gestionas un club de pádel? Dinos cómo DigiCourt puede transformar tu instalación.', 'qr.time2': '⏱ Unos 3 minutos', 'qr.btn2': 'Responder →',
+      'footer.tag': 'El marcador digital para pádel y deportes de raqueta', 'footer.contact.p': '¿Una pregunta? Respondemos en menos de 24h.',
+    }
+  };
+
+  const SINGLES = [
+    ['h1','hero.h1',true],['.hero-sub','hero.sub',false],['#interest-form .btn-cta','hero.btn',false],
+    ['#produit .section-tag','product.tag',false],['#produit h2','product.h2',true],['#produit .section-sub','product.sub',false],
+    ['#solution .section-tag','problem.tag',false],['#solution h2','problem.h2',true],['#solution .divider-label span','problem.divider',false],
+    ['#features .section-tag','features.tag',false],['#features h2','features.h2',true],['#features .section-sub','features.sub',false],
+    ['#how .section-tag','how.tag',false],['#how h2','how.h2',true],['#how .section-sub','how.sub',false],
+    ['#commander .section-tag','price.tag',false],['#commander h2','price.h2',false],
+    ['#commander .price-left > p','price.p',false],['#commander .price-note','price.note',false],
+    ['#commander .btn-lime','price.btn',false],['#commander .no-commitment','price.nocommit',false],
+    ['#terrain .section-tag','proof.tag',false],['#terrain h2','proof.h2',true],['#terrain .section-sub','proof.sub',false],
+    ['#avis .section-tag','testi.tag',false],['#avis h2','testi.h2',true],['#avis .section-sub','testi.sub',false],
+    ['#gallery .section-tag','gallery.tag',false],['#gallery h2','gallery.h2',true],['#gallery .section-sub','gallery.sub',false],
+    ['#equipe .section-tag','team.tag',false],['#equipe h2','team.h2',true],['#equipe .section-sub','team.sub',false],
+    ['#faq .section-tag','faq.tag',false],['#faq h2','faq.h2',true],['#faq .section-sub','faq.sub',false],
+    ['#questionnaires .section-tag','quest.tag',false],['#questionnaires h2','quest.h2',true],['#questionnaires .section-sub','quest.sub',false],
+    ['.footer-tag','footer.tag',false],['footer .footer-contact p','footer.contact.p',false],
+  ];
+
+  const MULTIS = [
+    ['.nav-links li a', ['nav.features','nav.how','nav.terrain','nav.photos','nav.cta'], false],
+    ['.mob-link', ['nav.features','nav.how','nav.terrain','nav.photos'], false],
+    ['.mob-cta', ['nav.cta.mob'], false],
+    ['.stat-label', ['stats.l1','stats.l2','stats.l3','stats.l4','stats.l5'], false],
+    ['.product-caption', ['p.cap1','p.cap2','p.cap3','p.cap4','p.cap5','p.cap6'], false],
+    ['.check-list.bad li', ['pb1','pb2','pb3','pb4'], true],
+    ['.check-list.good li', ['pg1','pg2','pg3','pg4'], true],
+    ['.feature-pill', ['f1.pill','f2.pill','f3.pill','f4.pill','f5.pill','f6.pill'], false],
+    ['.feature-title', ['f1.title','f2.title','f3.title','f4.title','f5.title','f6.title'], false],
+    ['.feature-desc', ['f1.desc','f2.desc','f3.desc','f4.desc','f5.desc','f6.desc'], false],
+    ['.step-title', ['s1.title','s2.title','s3.title'], false],
+    ['.step-desc', ['s1.desc','s2.desc','s3.desc'], false],
+    ['.proof-text', ['proof.q1','proof.q2'], false],
+    ['.proof-author', ['proof.a1','proof.a2'], false],
+    ['.proof-club', ['proof.r1','proof.r2'], false],
+    ['.proof-stat-label', ['proof.sl1','proof.sl2','proof.sl3','proof.sl4'], false],
+    ['.team-role', ['team.jules.role','team.many.role'], false],
+    ['.team-bio', ['team.jules.bio','team.many.bio'], false],
+    ['.gallery-caption', ['gal.cap1','gal.cap2'], false],
+    ['.faq-question', ['faq.q1','faq.q2','faq.q3','faq.q4','faq.q5','faq.q6','faq.q7','faq.q8'], true],
+    ['.qr-title', ['qr.t1','qr.t2'], false],
+    ['.qr-desc', ['qr.d1','qr.d2'], false],
+    ['.qr-time', ['qr.time1','qr.time2'], false],
+    ['.qr-card .btn-outline', ['qr.btn1','qr.btn2'], false],
+  ];
+
+  const orig = {};
+
+  function store() {
+    SINGLES.forEach(([sel, key, html]) => {
+      const el = document.querySelector(sel);
+      if (el) orig[key] = html ? el.innerHTML : el.textContent;
+    });
+    MULTIS.forEach(([sel, keys, html]) => {
+      [...document.querySelectorAll(sel)].forEach((el, i) => {
+        if (keys[i] !== undefined) orig[keys[i]] = html ? el.innerHTML : el.textContent;
+      });
+    });
+    const inp = document.querySelector('#interest-form input[type="email"]');
+    if (inp) orig['_ph'] = inp.placeholder;
+  }
+
+  function applyLang(lang) {
+    const t = lang === 'fr' ? orig : trans[lang];
+    if (!t) return;
+
+    SINGLES.forEach(([sel, key, html]) => {
+      const el = document.querySelector(sel);
+      const val = t[key];
+      if (!el || val === undefined) return;
+      html ? (el.innerHTML = val) : (el.textContent = val);
+    });
+
+    MULTIS.forEach(([sel, keys, html]) => {
+      [...document.querySelectorAll(sel)].forEach((el, i) => {
+        const val = t[keys[i]];
+        if (val === undefined) return;
+        html ? (el.innerHTML = val) : (el.textContent = val);
+      });
+    });
+
+    const inp = document.querySelector('#interest-form input[type="email"]');
+    if (inp) inp.placeholder = lang === 'fr' ? orig['_ph'] : (lang === 'en' ? 'your@email.com' : 'tu@email.com');
+
+    document.documentElement.lang = lang;
+    localStorage.setItem('dc_lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    store();
+    document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+    const saved = localStorage.getItem('dc_lang');
+    if (saved && saved !== 'fr') applyLang(saved);
   });
 })();
 </script>
